@@ -25,6 +25,7 @@ renderBrandIcons();
 
 const contractAddress = "0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e";
 const baseChainId = "0x2105";
+const pairDataUrl = "https://api.dexscreener.com/latest/dex/pairs/base/0xc4fbb564d11a36b71d0152a1a8cddec709e20908";
 
 const copyButton = document.querySelector("#copyContract");
 const copyState = document.querySelector("#copyState");
@@ -122,6 +123,58 @@ async function connectWallet() {
 }
 
 copyButton.addEventListener("click", copyContract);
+function formatUsd(value, options = {}) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) {
+    return "--";
+  }
+
+  if (number > 0 && number < 0.01) {
+    return `$${number.toFixed(options.microDecimals ?? 6)}`;
+  }
+
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    notation: options.compact ? "compact" : "standard",
+    maximumFractionDigits: options.maximumFractionDigits ?? 2,
+  }).format(number);
+}
+
+function updateMarketText(selector, value) {
+  document.querySelectorAll(selector).forEach((element) => {
+    element.textContent = value;
+  });
+}
+
+async function updateMarketData() {
+  try {
+    const response = await fetch(pairDataUrl, { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error("Pair request failed");
+    }
+
+    const data = await response.json();
+    const pair = data.pair || data.pairs?.[0];
+    if (!pair) {
+      throw new Error("Pair data unavailable");
+    }
+
+    const price = formatUsd(pair.priceUsd, { microDecimals: 6, maximumFractionDigits: 6 });
+    const liquidity = formatUsd(pair.liquidity?.usd, { compact: true });
+    const volume = formatUsd(pair.volume?.h24, { compact: true });
+
+    document.querySelector("#livePrice").textContent = price;
+    updateMarketText("[data-market-price]", price);
+    updateMarketText("[data-market-liquidity]", liquidity);
+    updateMarketText("[data-market-volume]", volume);
+  } catch {
+    updateMarketText("[data-market-price]", "Price unavailable");
+  }
+}
+
+updateMarketData();
+window.setInterval(updateMarketData, 60000);
 connectButtons.forEach((button) => button.addEventListener("click", connectWallet));
 
 const provider = getProvider();
