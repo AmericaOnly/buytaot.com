@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="TAOT, The America Only Token, on Base. Supply: 250 million. Available on Coinbase.">
+    <title>TAOT | The America Only Token</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="patriot-scan" aria-hidden="true"></div>
+
+    <div class="layout-shell">
+      <aside class="side-rail" aria-label="TAOT navigation">
+        <a class="rail-brand" href="#top" aria-label="TAOT home">
+          <img class="brand-logo" src="/images/taot.png" alt="TAOT logo">
+          <span>TAOT</span>
+        </a>
+        <nav class="rail-nav">
+          <a href="#token">Token</a>
+          <a href="#base">Base Network</a>
+          <a href="#connect">Wallet</a>
+          <a href="#community">Social</a>
+        </nav>
+        <button class="wallet-button" id="connectWallet" type="button">
+          <span class="wallet-dot" aria-hidden="true"></span>
+          <span id="walletLabel">Connect</span>
+        </button>
+      </aside>
+
+      <main class="main-stage" id="top">
+        <section class="hero-grid" aria-labelledby="hero-title">
+          <div class="flag-panel">
+            <div class="flag-stripes" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="hero-copy">
+              <h1 id="hero-title">The America Only Token</h1>
+              <p class="hero-line">TAOT is an ERC-20 token on Base Network with a fixed 250 million supply and a <a class="wallet-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e#code" target="_blank" rel="noreferrer">verified public contract</a>.</p>
+              <div class="hero-actions" aria-label="Primary actions">
+                <a class="button primary" href="https://www.coinbase.com/" target="_blank" rel="noreferrer">
+                  <span>Open Coinbase</span>
+                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M13.5 5 20 11.5 13.5 18l-1.4-1.4 4.1-4.1H4v-2h12.2l-4.1-4.1L13.5 5Z"/></svg>
+                </a>
+                <a class="button ghost" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">
+                  <span>Basescan</span>
+                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14V3ZM5 5h6v2H7v10h10v-4h2v6H5V5Z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="ticker-stack" id="token" aria-label="TAOT token details">
+            <div class="ticker-topline">
+              <span class="ticker-symbol">TAOT</span>
+              <a class="status" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e#code" target="_blank" rel="noreferrer">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>Contract verified</span>
+              </a>
+            </div>
+
+            <div class="token-logo-stage" aria-hidden="true">
+              <img class="token-logo-large" src="/images/taot.png" alt="">
+            </div>
+
+            <dl class="ledger-grid">
+              <div>
+                <dt>Supply</dt>
+                <dd>250,000,000</dd>
+              </div>
+              <div>
+                <dt>Network</dt>
+                <dd>Base Network</dd>
+              </div>
+              <div>
+                <dt>Type</dt>
+                <dd>ERC-20</dd>
+              </div>
+              <div>
+                <dt>Live price</dt>
+                <dd>0</dd>
+              </div>
+            </dl>
+
+            <button class="contract-copy" id="copyContract" type="button" aria-label="Copy contract address">
+              <span>Contract address</span>
+              <strong id="contractText">0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e</strong>
+              <small id="copyState">Click to copy</small>
+            </button>
+          </div>
+        </section>
+
+        <section class="base-strip" id="base" aria-labelledby="base-title">
+          <div class="section-heading">
+            <h2 id="base-title">Base Network gives TAOT fast EVM access.</h2>
+          </div>
+          <div class="base-grid">
+            <article>
+              <h3>Ethereum layer 2</h3>
+              <p>Base is an Ethereum L2 designed for lower-cost transactions while remaining part of the EVM ecosystem.</p>
+            </article>
+            <article>
+              <h3>Wallet compatible</h3>
+              <p>MetaMask, Coinbase Wallet, Trust Wallet, and other EVM wallets can connect to Base and read ERC-20 balances.</p>
+            </article>
+            <article>
+              <h3>Public verification</h3>
+              <p>Basescan exposes the token contract, transfers, holders, and verified code for direct inspection.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="connect-dock" id="connect" aria-labelledby="wallet-title">
+          <div class="dock-copy">
+            <h2 id="wallet-title">Get TAOT</h2>
+            <p>Here you can easily swap USDC or ETH into TAOT using your <a class="wallet-link" href="https://metamask.io/download" target="_blank" rel="noreferrer">MetaMask</a>, <a class="wallet-link" href="https://base.app/" target="_blank" rel="noreferrer">Base</a>, or <a class="wallet-link" href="https://trustwallet.com/download" target="_blank" rel="noreferrer">Trust Wallet</a>.</p>
+          </div>
+          <div class="swap-card" aria-label="Wallet connection panel">
+            <div class="swap-row">
+              <span>Wallet</span>
+              <strong id="walletStatus">Not connected</strong>
+            </div>
+            <div class="swap-row">
+              <span>Target chain</span>
+              <strong>Base Network</strong>
+            </div>
+            <div class="swap-row">
+              <span>Token</span>
+              <strong>TAOT</strong>
+            </div>
+            <button class="button primary full" id="panelConnect" type="button">Connect Wallet</button>
+            <p class="panel-note" id="walletMessage">No transaction will be requested.</p>
+          </div>
+        </section>
+
+        <section class="community" id="community" aria-labelledby="community-title">
+          <div class="section-heading compact">
+            <p class="eyebrow">Official channels</p>
+            <h2 id="community-title">TAOT socials</h2>
+          </div>
+          <div class="social-grid" aria-label="Social media links">
+            <a class="social-link" href="https://x.com/buytaot" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="x">X</span><span>X</span></a>
+            <a class="social-link" href="https://linktr.ee/TAOT.USA" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="linktree">Linktree</span><span>Linktree</span></a>
+            <a class="social-link" href="https://instagram.com/theamericaonlytoken" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="instagram">Instagram</span><span>Instagram</span></a>
+            <a class="social-link" href="https://www.youtube.com/@TheAmericaOnlyToken" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="youtube">YouTube</span><span>YouTube</span></a>
+            <a class="social-link" href="https://www.facebook.com/profile.php?id=61591249756495" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="facebook">Facebook</span><span>Facebook</span></a>
+            <a class="social-link" href="https://t.me/BUYTAOT" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="telegram">Telegram</span><span>Telegram</span></a>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <span>TAOT</span>
+          <a href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Basescan contract</a>
+        </footer>
+      </main>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
