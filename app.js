@@ -29,7 +29,7 @@ const pairDataUrl = "https://api.dexscreener.com/latest/dex/pairs/base/0xc4fbb56
 
 const copyButton = document.querySelector("#copyContract");
 const copyState = document.querySelector("#copyState");
-const connectButtons = [document.querySelector("#connectWallet"), document.querySelector("#panelConnect")];
+const connectButtons = [document.querySelector("#connectWallet"), document.querySelector("#panelConnect")].filter(Boolean);
 const walletLabel = document.querySelector("#walletLabel");
 const walletStatus = document.querySelector("#walletStatus");
 const walletMessage = document.querySelector("#walletMessage");
@@ -66,9 +66,9 @@ function getProvider() {
 function setConnected(address) {
   document.querySelector("#connectWallet").classList.add("connected");
   walletLabel.textContent = shortAddress(address);
-  walletStatus.textContent = shortAddress(address);
-  document.querySelector("#panelConnect").textContent = "Wallet Connected";
-  walletMessage.textContent = "Connected. Swap integration can use this wallet session next.";
+  walletStatus && (walletStatus.textContent = shortAddress(address));
+  document.querySelector("#panelConnect") && (document.querySelector("#panelConnect").textContent = "Wallet Connected");
+  walletMessage && (walletMessage.textContent = "Connected.");
 }
 
 async function requestBaseNetwork(provider) {
@@ -101,24 +101,24 @@ async function connectWallet() {
   const provider = getProvider();
 
   if (!provider?.request) {
-    walletMessage.textContent = "Install MetaMask, Coinbase Wallet, Trust Wallet, or another EVM wallet to connect.";
+    walletMessage && (walletMessage.textContent = "Install MetaMask, Coinbase Wallet, Trust Wallet, or another EVM wallet to connect.");
     return;
   }
 
   try {
-    walletMessage.textContent = "Waiting for wallet approval...";
+    walletMessage && (walletMessage.textContent = "Waiting for wallet approval...");
     const accounts = await provider.request({ method: "eth_requestAccounts" });
     if (!accounts?.[0]) {
-      walletMessage.textContent = "No wallet account was selected.";
+      walletMessage && (walletMessage.textContent = "No wallet account was selected.");
       return;
     }
 
     await requestBaseNetwork(provider);
     setConnected(accounts[0]);
   } catch (error) {
-    walletMessage.textContent = error?.code === 4001
+    walletMessage && (walletMessage.textContent = error?.code === 4001
       ? "Connection request cancelled."
-      : "Wallet connection was not completed.";
+      : "Wallet connection was not completed.");
   }
 }
 
@@ -174,6 +174,34 @@ async function updateMarketData() {
 }
 
 updateMarketData();
+const siteSwapWidgetUrl = "https://americaonly.github.io/siteswap/widget.js";
+
+function loadSiteSwapWidget() {
+  const target = document.querySelector("#siteswapWidget");
+  if (!target) {
+    return;
+  }
+
+  const initialize = () => {
+    window.BungeeWidget?.init?.({ targetId: "siteswapWidget" });
+  };
+
+  if (window.BungeeWidget?.init) {
+    initialize();
+    return;
+  }
+
+  const script = document.createElement("script");
+  script.src = siteSwapWidgetUrl;
+  script.async = true;
+  script.onload = initialize;
+  script.onerror = () => {
+    target.textContent = "Swap widget unavailable. Please refresh or try again later.";
+  };
+  document.head.append(script);
+}
+
+loadSiteSwapWidget();
 window.setInterval(updateMarketData, 60000);
 connectButtons.forEach((button) => button.addEventListener("click", connectWallet));
 
@@ -195,8 +223,8 @@ if (provider?.request) {
 
     document.querySelector("#connectWallet").classList.remove("connected");
     walletLabel.textContent = "Connect Wallet";
-    walletStatus.textContent = "Not connected";
-    document.querySelector("#panelConnect").textContent = "Connect Wallet";
-    walletMessage.textContent = "No transaction will be requested.";
+    walletStatus && (walletStatus.textContent = "Not connected");
+    document.querySelector("#panelConnect") && (document.querySelector("#panelConnect").textContent = "Connect Wallet");
+    walletMessage && (walletMessage.textContent = "No transaction will be requested.");
   });
 }

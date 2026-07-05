@@ -955,3 +955,15 @@ dd {
     flex-direction: column;
   }
 }
+
+.siteswap-card {
+  min-height: 640px;
+  padding: 0;
+  overflow: hidden;
+  background: rgba(5, 10, 20, 0.72);
+}
+
+#siteswapWidget {
+  display: block;
+  min-height: 640px;
+}
