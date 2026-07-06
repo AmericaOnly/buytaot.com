@@ -584,6 +584,59 @@ dd {
   line-height: 1.72;
 }
 
+.whitepaper-download {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  margin-top: 16px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(239, 64, 86, 0.18), transparent 12rem),
+    radial-gradient(circle at 88% 12%, rgba(52, 125, 255, 0.2), transparent 12rem),
+    rgba(10, 20, 40, 0.82);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 22px 60px rgba(0, 0, 0, 0.18);
+}
+
+.whitepaper-download::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(90deg, rgba(239, 64, 86, 0.16), rgba(255, 255, 255, 0.08), rgba(52, 125, 255, 0.16));
+  opacity: 0.24;
+  animation: sheen 8s ease-in-out infinite alternate;
+}
+
+.whitepaper-download > * {
+  position: relative;
+  z-index: 1;
+}
+
+.download-kicker {
+  display: inline-flex;
+  margin-bottom: 10px;
+  color: var(--blue-soft);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.whitepaper-download h3 {
+  margin-bottom: 8px;
+}
+
+.whitepaper-download p {
+  max-width: 720px;
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.68;
+}
+
 .base-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -804,6 +857,16 @@ dd {
   }
 }
 
+@keyframes sheen {
+  from {
+    transform: translateX(-18%);
+  }
+
+  to {
+    transform: translateX(18%);
+  }
+}
+
 @keyframes auroraShift {
   from {
     transform: translate3d(-2%, -1%, 0) scale(1);
@@ -946,6 +1009,15 @@ dd {
     grid-template-columns: auto 1fr;
     justify-content: start;
     padding: 0 16px;
+  }
+
+  .whitepaper-download {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .whitepaper-download .button {
+    width: 100%;
   }
 
   .ticker-topline,
