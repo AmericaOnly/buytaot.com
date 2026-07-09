@@ -201,7 +201,27 @@ function loadSiteSwapWidget() {
   document.head.append(script);
 }
 
+function initializePodcastVideos() {
+  document.querySelectorAll(".podcast-video").forEach((player) => {
+    const button = player.querySelector(".video-thumb");
+    if (!button) {
+      return;
+    }
+
+    button.addEventListener("click", () => {
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube-nocookie.com/embed/${player.dataset.videoId}?autoplay=1&rel=0`;
+      iframe.title = player.dataset.videoTitle || "TAOT podcast video";
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      player.replaceChildren(iframe);
+    });
+  });
+}
+
 loadSiteSwapWidget();
+initializePodcastVideos();
 window.setInterval(updateMarketData, 60000);
 connectButtons.forEach((button) => button.addEventListener("click", connectWallet));
 
