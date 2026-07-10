@@ -335,6 +335,9 @@ h3 {
 
 .button {
   display: inline-flex;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   min-height: 50px;
   align-items: center;
   justify-content: center;
@@ -344,6 +347,23 @@ h3 {
   color: var(--text);
   font-weight: 900;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.button::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  background: linear-gradient(120deg, transparent 0 28%, rgba(255, 255, 255, 0.28) 44%, transparent 60% 100%);
+  opacity: 0;
+  transform: translateX(-120%);
+  transition: opacity 180ms ease, transform 520ms ease;
+}
+
+.button:hover::before,
+.button:focus-visible::before {
+  opacity: 1;
+  transform: translateX(120%);
 }
 
 .button:hover,
@@ -366,6 +386,20 @@ h3 {
 .button.ghost {
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.075);
+}
+
+.button.market {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background:
+    linear-gradient(135deg, rgba(239, 64, 86, 0.24), rgba(255, 255, 255, 0.11) 46%, rgba(52, 125, 255, 0.26)),
+    rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 38px rgba(239, 64, 86, 0.14), 0 0 24px rgba(52, 125, 255, 0.14);
+}
+
+.button.market:hover,
+.button.market:focus-visible {
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow: 0 20px 48px rgba(239, 64, 86, 0.18), 0 0 34px rgba(52, 125, 255, 0.2);
 }
 
 .button.full {
