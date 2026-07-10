@@ -773,6 +773,15 @@ dd {
   font-weight: 950;
 }
 
+.site-disclaimer {
+  max-width: 980px;
+  margin: -14px auto 24px;
+  color: rgba(173, 187, 207, 0.66);
+  font-size: 0.68rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
 
 .market-ticker {
   position: relative;
