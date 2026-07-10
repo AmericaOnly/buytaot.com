@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Watch TAOT podcast videos from The America Only Token official YouTube channel.">
+    <title>TAOT Podcast | The America Only Token</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="patriot-scan" aria-hidden="true"></div>
+
+    <div class="layout-shell">
+      <aside class="side-rail" aria-label="TAOT navigation">
+        <a class="rail-brand" href="index.html" aria-label="TAOT home">
+          <img class="brand-logo" src="/images/taot.png" alt="TAOT logo">
+          <span>TAOT</span>
+        </a>
+        <nav class="rail-nav">
+          <a href="index.html#token">Token</a>
+          <a href="index.html#base">Base Network</a>
+          <a href="index.html#connect">Get TAOT</a>
+          <a href="podcast.html" aria-current="page">Podcast</a>
+          <a href="#community">Social</a>
+          <a href="https://whitepaper.buytaot.com" target="_blank" rel="noreferrer">Whitepaper</a>
+        </nav>
+        <button class="wallet-button" id="connectWallet" type="button">
+          <span class="wallet-dot" aria-hidden="true"></span>
+          <span id="walletLabel">Connect</span>
+        </button>
+      </aside>
+
+      <main class="main-stage podcast-page" id="top">
+        <section class="podcast-section podcast-page-section" id="podcast" aria-labelledby="podcast-title">
+          <div class="podcast-hero">
+            <p class="eyebrow">TAOT Podcast</p>
+            <h1 id="podcast-title">Conversations from The America Only Token.</h1>
+            <p>Watch episodes from the official TAOT YouTube channel, featuring project updates, community conversations, and digital asset culture around The America Only Token.</p>
+            <a class="button ghost" href="https://www.youtube.com/@TheAmericaOnlyToken" target="_blank" rel="noreferrer">
+              <span>Open YouTube Channel</span>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 15.5 15.2 12 10 8.5v7ZM21.6 7.1s.2 1.7.2 3.4v3c0 1.7-.2 3.4-.2 3.4s-.2 1.4-.8 2c-.8.8-1.7.8-2.1.9-2.9.2-7.2.2-7.2.2s-5.4 0-7.1-.2c-.5-.1-1.6-.1-2.4-.9-.6-.6-.8-2-.8-2S1 15.2 1 13.5v-3c0-1.7.2-3.4.2-3.4s.2-1.4.8-2c.8-.8 1.7-.8 2.1-.9C7 4 11.4 4 11.4 4h.1s4.4 0 7.3.2c.4.1 1.3.1 2.1.9.5.6.7 2 .7 2Z"/></svg>
+            </a>
+          </div>
+
+          <div class="podcast-grid" aria-label="TAOT podcast videos">
+            <article class="podcast-card">
+              <div class="podcast-video" data-video-id="ta-cOwupCHM" data-video-title="The America Only Token Podcast">
+                <button class="video-thumb" type="button" aria-label="Play The America Only Token Podcast">
+                  <img src="https://i.ytimg.com/vi/ta-cOwupCHM/hqdefault.jpg" alt="" loading="lazy">
+                  <span class="play-icon" aria-hidden="true"></span>
+                  <span class="watch-label">Play episode</span>
+                </button>
+                <a class="youtube-fallback" href="https://www.youtube.com/watch?v=ta-cOwupCHM" target="_blank" rel="noreferrer">Watch on YouTube</a>
+              </div>
+              <div class="podcast-copy">
+                <p class="episode-label">Featured episode</p>
+                <h2>The America Only Token Podcast</h2>
+                <div class="video-description">
+                  <p>A featured TAOT video from the official channel. The podcast section will expand as new episodes and public descriptions are released.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="community" id="community" aria-labelledby="community-title">
+          <div class="section-heading compact">
+            <p class="eyebrow">Official channels</p>
+            <h2 id="community-title">TAOT Socials</h2>
+          </div>
+          <div class="social-grid" aria-label="Social media links">
+            <a class="social-link" href="https://x.com/buytaot" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="x">X</span><span>X</span></a>
+            <a class="social-link" href="https://linktr.ee/TAOT.USA" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="linktree">Linktree</span><span>Linktree</span></a>
+            <a class="social-link" href="https://instagram.com/theamericaonlytoken" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="instagram">Instagram</span><span>Instagram</span></a>
+            <a class="social-link" href="https://www.youtube.com/@TheAmericaOnlyToken" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="youtube">YouTube</span><span>YouTube</span></a>
+            <a class="social-link" href="https://www.facebook.com/profile.php?id=61591249756495" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="facebook">Facebook</span><span>Facebook</span></a>
+            <a class="social-link" href="https://t.me/BUYTAOT" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="telegram">Telegram</span><span>Telegram</span></a>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <span>Copyright 2026 - The America Only Token</span>
+        </footer>
+        <p class="site-disclaimer">Disclaimer: TAOT is a community digital asset and may be volatile. This website is for informational purposes only and does not provide financial, investment, legal, or tax advice. No returns, outcomes, or future availability are guaranteed. Always do your own research and verify contract addresses before transacting.</p>
+      </main>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

@@ -41,14 +41,14 @@ function shortAddress(address) {
 async function copyContract() {
   try {
     await navigator.clipboard.writeText(contractAddress);
-    copyButton.classList.add("copied");
-    copyState.textContent = "Copied";
+    copyButton?.classList.add("copied");
+    copyState && (copyState.textContent = "Copied");
     window.setTimeout(() => {
-      copyButton.classList.remove("copied");
-      copyState.textContent = "Click to copy";
+      copyButton?.classList.remove("copied");
+      copyState && (copyState.textContent = "Click to copy");
     }, 1800);
   } catch {
-    copyState.textContent = "Copy unavailable";
+    copyState && (copyState.textContent = "Copy unavailable");
   }
 }
 
@@ -64,8 +64,8 @@ function getProvider() {
 }
 
 function setConnected(address) {
-  document.querySelector("#connectWallet").classList.add("connected");
-  walletLabel.textContent = shortAddress(address);
+  document.querySelector("#connectWallet")?.classList.add("connected");
+  walletLabel && (walletLabel.textContent = shortAddress(address));
   walletStatus && (walletStatus.textContent = shortAddress(address));
   document.querySelector("#panelConnect") && (document.querySelector("#panelConnect").textContent = "Wallet Connected");
   walletMessage && (walletMessage.textContent = "Connected.");
@@ -122,7 +122,7 @@ async function connectWallet() {
   }
 }
 
-copyButton.addEventListener("click", copyContract);
+copyButton?.addEventListener("click", copyContract);
 function formatUsd(value, options = {}) {
   const number = Number(value);
   if (!Number.isFinite(number)) {
@@ -164,7 +164,10 @@ async function updateMarketData() {
     const liquidity = formatUsd(pair.liquidity?.usd, { compact: true });
     const volume = formatUsd(pair.volume?.h24, { compact: true });
 
-    document.querySelector("#livePrice").textContent = price;
+    const livePrice = document.querySelector("#livePrice");
+    if (livePrice) {
+      livePrice.textContent = price;
+    }
     updateMarketText("[data-market-price]", price);
     updateMarketText("[data-market-liquidity]", liquidity);
     updateMarketText("[data-market-volume]", volume);
@@ -173,7 +176,9 @@ async function updateMarketData() {
   }
 }
 
-updateMarketData();
+if (document.querySelector("#livePrice") || document.querySelector("[data-market-price]")) {
+  updateMarketData();
+}
 const siteSwapWidgetUrl = "https://americaonly.github.io/siteswap/widget.js";
 
 function loadSiteSwapWidget() {
@@ -222,7 +227,9 @@ function initializePodcastVideos() {
 
 loadSiteSwapWidget();
 initializePodcastVideos();
-window.setInterval(updateMarketData, 60000);
+if (document.querySelector("#livePrice") || document.querySelector("[data-market-price]")) {
+  window.setInterval(updateMarketData, 60000);
+}
 connectButtons.forEach((button) => button.addEventListener("click", connectWallet));
 
 const provider = getProvider();
@@ -241,8 +248,8 @@ if (provider?.request) {
       return;
     }
 
-    document.querySelector("#connectWallet").classList.remove("connected");
-    walletLabel.textContent = "Connect Wallet";
+    document.querySelector("#connectWallet")?.classList.remove("connected");
+    walletLabel && (walletLabel.textContent = "Connect Wallet");
     walletStatus && (walletStatus.textContent = "Not connected");
     document.querySelector("#panelConnect") && (document.querySelector("#panelConnect").textContent = "Connect Wallet");
     walletMessage && (walletMessage.textContent = "No transaction will be requested.");
