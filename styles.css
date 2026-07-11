@@ -722,8 +722,9 @@ dd {
 
 .podcast-card {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.82fr);
   overflow: hidden;
+  max-width: 980px;
+  margin: 0 auto;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-md);
   background:
@@ -734,9 +735,12 @@ dd {
 
 .podcast-video {
   position: relative;
-  min-height: 330px;
   overflow: hidden;
-  background: #030816;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(52, 125, 255, 0.16), transparent 22rem),
+    #030816;
 }
 
 .podcast-video iframe,
@@ -777,15 +781,15 @@ dd {
 .video-thumb img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  opacity: 0.78;
+  object-fit: contain;
+  opacity: 0.9;
   transition: opacity 180ms ease, transform 240ms ease;
 }
 
 .video-thumb:hover img,
 .video-thumb:focus-visible img {
-  opacity: 0.94;
-  transform: scale(1.025);
+  opacity: 1;
+  transform: scale(1.01);
 }
 
 .play-icon {
@@ -853,6 +857,7 @@ dd {
 .podcast-copy {
   min-width: 0;
   padding: clamp(22px, 3vw, 34px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
 }
 
 .episode-label {
@@ -863,6 +868,7 @@ dd {
   text-transform: uppercase;
 }
 
+.podcast-copy h2,
 .podcast-copy h3 {
   margin-bottom: 16px;
   font-size: clamp(1.45rem, 2.7vw, 2.45rem);
@@ -870,9 +876,16 @@ dd {
 }
 
 .video-description {
+  display: grid;
+  max-width: 840px;
+  gap: 12px;
   color: var(--muted);
   font-size: 1rem;
   line-height: 1.7;
+}
+
+.video-description p {
+  margin-bottom: 0;
 }
 
 .base-grid {
@@ -1193,11 +1206,7 @@ dd {
   }
 
   .podcast-card {
-    grid-template-columns: 1fr;
-  }
-
-  .podcast-video {
-    min-height: clamp(240px, 58vw, 380px);
+    max-width: 100%;
   }
 
   .hero-grid {
