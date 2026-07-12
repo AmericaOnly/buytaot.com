@@ -37,6 +37,7 @@
         <nav class="rail-nav">
           <a href="#token">Token</a>
           <a href="#base">Base Network</a>
+          <a href="#wallets">Wallets</a>
           <a href="#connect">Get TAOT</a>
           <a href="podcast.html">Podcast</a>
           <a href="#community">Social</a>
@@ -167,6 +168,111 @@
             <article>
               <h3>Transparent records</h3>
               <p>Basescan exposes the token contract, transfers, holders, and verified code for direct public inspection.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="wallets-section" id="wallets" aria-labelledby="wallets-title">
+          <div class="section-heading">
+            <p class="eyebrow">Wallet compatibility</p>
+            <h2 id="wallets-title">Add TAOT to wallets that support Base Network tokens.</h2>
+            <p>TAOT is an ERC-20 token on Base Network. These are the most popular wallets that support storing TAOT.</p>
+          </div>
+
+          <div class="wallets-grid" aria-label="Wallet options for TAOT">
+            <article class="wallet-card featured-wallet">
+              <div class="wallet-card-topline">
+                <span class="wallet-mark"><img src="https://metamask.io/favicons/default/favicon.svg" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
+                <span>Browser extension and mobile app</span>
+              </div>
+              <h3>MetaMask</h3>
+              <p>Connect MetaMask, switch to Base Network, then add TAOT using the verified contract address. The button below uses MetaMask's standard token import prompt when available.</p>
+              <div class="wallet-actions">
+                <button class="button primary" id="addToMetaMask" type="button">
+                  <span>Add to MetaMask</span>
+                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M11 4h2v7h7v2h-7v7h-2v-7H4v-2h7V4Z"/></svg>
+                </button>
+                <a class="button ghost" href="https://metamask.io/download/" target="_blank" rel="noreferrer">Download</a>
+              </div>
+              <small id="addTokenState">No transaction is requested. Your wallet will ask before importing the token.</small>
+            </article>
+
+            <article class="wallet-card">
+              <div class="wallet-card-topline">
+                <span class="wallet-mark"><img src="https://base.app/static-open-graph/v1/favicon.png" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
+                <span>Base ecosystem wallet</span>
+              </div>
+              <h3>Base Wallet</h3>
+              <p>Use Base Wallet with Base Network selected, then search for TAOT or import the token with the contract address shown on this site.</p>
+              <div class="wallet-actions">
+                <a class="button ghost" href="https://base.app/" target="_blank" rel="noreferrer">Download</a>
+                <a class="wallet-mini-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify contract</a>
+              </div>
+            </article>
+
+            <article class="wallet-card">
+              <div class="wallet-card-topline">
+                <span class="wallet-mark"><img src="https://trustwallet.com/icon.svg" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
+                <span>Mobile and browser wallet</span>
+              </div>
+              <h3>Trust Wallet</h3>
+              <p>Open Trust Wallet, choose Base Network, and import TAOT as a custom token using the verified contract address.</p>
+              <div class="wallet-actions">
+                <a class="button ghost" href="https://trustwallet.com/download" target="_blank" rel="noreferrer">Download</a>
+                <a class="wallet-mini-link" href="#token">Copy contract</a>
+              </div>
+            </article>
+
+            <article class="wallet-card">
+              <div class="wallet-card-topline">
+                <span class="wallet-mark coinbase-mark"><img src="https://www.coinbase.com/favicon.ico" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
+                <span>Coinbase wallet app and extension</span>
+              </div>
+              <h3>Coinbase Wallet</h3>
+              <p>Use Coinbase Wallet or Base App with Base Network selected, then import TAOT with the verified contract address if it is not shown automatically.</p>
+              <div class="wallet-actions">
+                <a class="button ghost" href="https://www.coinbase.com/wallet/downloads" target="_blank" rel="noreferrer">Download</a>
+                <a class="wallet-mini-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify contract</a>
+              </div>
+            </article>
+
+            <article class="wallet-card">
+              <div class="wallet-card-topline">
+                <span class="wallet-mark okx-mark"><img src="https://www.okx.com/favicon.ico" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
+                <span>Multi-chain Web3 wallet</span>
+              </div>
+              <h3>OKX Wallet</h3>
+              <p>Open OKX Wallet, switch to Base Network, and add TAOT as a custom token using the contract address from the token details section.</p>
+              <div class="wallet-actions">
+                <a class="button ghost" href="https://web3.okx.com/" target="_blank" rel="noreferrer">Download</a>
+                <a class="wallet-mini-link" href="#token">Copy contract</a>
+              </div>
+            </article>
+
+            <article class="wallet-card">
+              <div class="wallet-card-topline">
+                <span class="wallet-mark rainbow-mark"><img src="https://framerusercontent.com/images/Hml6PtJwt03gwFtTRYmbpo7EarY.png?height=1024&width=1024" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
+                <span>Mobile and browser wallet</span>
+              </div>
+              <h3>Rainbow Wallet</h3>
+              <p>Use Rainbow on mobile or browser extension, choose Base Network, and import TAOT with the verified contract address if needed.</p>
+              <div class="wallet-actions">
+                <a class="button ghost" href="https://rainbow.me/" target="_blank" rel="noreferrer">Download</a>
+                <a class="wallet-mini-link" href="#token">Copy contract</a>
+              </div>
+            </article>
+
+            <article class="wallet-card">
+              <div class="wallet-card-topline">
+                <span class="wallet-mark ledger-mark"><img src="https://shop.ledger.com/ledger-logo-short-white.svg" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
+                <span>Hardware wallet workflow</span>
+              </div>
+              <h3>Ledger</h3>
+              <p>Use Ledger Live or connect Ledger through a compatible EVM wallet, select Base Network, and verify the TAOT contract before receiving tokens.</p>
+              <div class="wallet-actions">
+                <a class="button ghost" href="https://www.ledger.com/ledger-live/download" target="_blank" rel="noreferrer">Download</a>
+                <a class="wallet-mini-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify contract</a>
+              </div>
             </article>
           </div>
         </section>

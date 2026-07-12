@@ -24,11 +24,17 @@ function renderBrandIcons() {
 renderBrandIcons();
 
 const contractAddress = "0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e";
+
+const tokenSymbol = "TAOT";
+const tokenDecimals = 18;
+const tokenImageUrl = "https://buytaot.com/images/taot.png";
 const baseChainId = "0x2105";
 const pairDataUrl = "https://api.dexscreener.com/latest/dex/pairs/base/0xc4fbb564d11a36b71d0152a1a8cddec709e20908";
 
 const copyButton = document.querySelector("#copyContract");
 const copyState = document.querySelector("#copyState");
+const addToMetaMaskButton = document.querySelector("#addToMetaMask");
+const addTokenState = document.querySelector("#addTokenState");
 const connectButtons = [document.querySelector("#connectWallet"), document.querySelector("#panelConnect")].filter(Boolean);
 const walletLabel = document.querySelector("#walletLabel");
 const walletStatus = document.querySelector("#walletStatus");
@@ -61,6 +67,14 @@ function getProvider() {
   }
 
   return window.ethereum;
+}
+
+function getMetaMaskProvider() {
+  if (window.ethereum?.providers?.length) {
+    return window.ethereum.providers.find((provider) => provider.isMetaMask);
+  }
+
+  return window.ethereum?.isMetaMask ? window.ethereum : null;
 }
 
 function setConnected(address) {
@@ -97,6 +111,41 @@ async function requestBaseNetwork(provider) {
   }
 }
 
+
+async function addTokenToMetaMask() {
+  const provider = getMetaMaskProvider();
+
+  if (!provider?.request) {
+    addTokenState && (addTokenState.textContent = "Install MetaMask to import TAOT from this page, or add the token manually in your wallet.");
+    return;
+  }
+
+  try {
+    addTokenState && (addTokenState.textContent = "Opening wallet import prompt...");
+    await requestBaseNetwork(provider);
+    const wasAdded = await provider.request({
+      method: "wallet_watchAsset",
+      params: {
+        type: "ERC20",
+        options: {
+          address: contractAddress,
+          symbol: tokenSymbol,
+          decimals: tokenDecimals,
+          image: tokenImageUrl,
+        },
+      },
+    });
+
+    addTokenState && (addTokenState.textContent = wasAdded
+      ? "TAOT import request accepted. Check your wallet token list."
+      : "Token import was not completed.");
+  } catch (error) {
+    addTokenState && (addTokenState.textContent = error?.code === 4001
+      ? "Token import cancelled in wallet."
+      : "Token import is not available in this wallet. You can still add TAOT manually with the contract address.");
+  }
+}
+
 async function connectWallet() {
   const provider = getProvider();
 
@@ -123,6 +172,7 @@ async function connectWallet() {
 }
 
 copyButton?.addEventListener("click", copyContract);
+addToMetaMaskButton?.addEventListener("click", addTokenToMetaMask);
 function formatUsd(value, options = {}) {
   const number = Number(value);
   if (!Number.isFinite(number)) {
