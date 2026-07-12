@@ -28,7 +28,9 @@
 
       main {
         display: grid;
-        gap: 18px;
+        width: min(1120px, calc(100vw - 32px));
+        gap: 22px;
+        padding: 40px 0;
       }
 
       h1 {
@@ -40,19 +42,41 @@
         text-shadow: 0 0 42px rgba(52, 125, 255, 0.24), 0 0 26px rgba(239, 64, 86, 0.18);
       }
 
-      p {
-        margin: 0;
-        color: #dbeafe;
-        font-size: clamp(1.2rem, 4vw, 2rem);
-        font-weight: 800;
-        text-shadow: 0 0 24px rgba(255, 255, 255, 0.16);
+      .widget-stack {
+        display: grid;
+        gap: 18px;
+        width: 100%;
+      }
+
+      .widget-card {
+        overflow: hidden;
+        min-height: 90px;
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 20px;
+        background: rgba(8, 17, 35, 0.78);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(18px);
       }
     </style>
   </head>
   <body>
     <main>
       <h1>Thanks Team Coinmarketcap!</h1>
-      <p>verifying market pair 7/9/2026</p>
+      <div class="widget-stack" aria-label="TAOT CoinMarketCap widgets">
+        <div class="widget-card">
+          <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/coinMarquee.js"></script>
+          <div id="coinmarketcap-widget-marquee" coins="40819" currency="USD" theme="dark" transparent="false" show-symbol-logo="true"></div>
+        </div>
+        <div class="widget-card">
+          <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/currency.js"></script>
+          <div class="coinmarketcap-currency-widget" data-currencyid="40819" data-base="USD" data-secondary="" data-ticker="true" data-rank="true" data-marketcap="false" data-volume="true" data-statsticker="true" data-stats="USD"></div>
+        </div>
+        <div class="widget-card">
+          <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/coinPriceBlock.js"></script>
+          <div id="coinmarketcap-widget-coin-price-block" coins="40819" currency="USD" theme="dark" transparent="false" show-symbol-logo="true"></div>
+        </div>
+      </div>
     </main>
   </body>
 </html>
