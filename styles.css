@@ -1028,12 +1028,12 @@ dd {
   border-radius: 8px;
 }
 
-.rainbow-mark {
+.phantom-mark {
   overflow: hidden;
-  background: rgba(8, 28, 84, 0.92);
+  background: rgba(85, 72, 255, 0.96);
 }
 
-.rainbow-mark img {
+.phantom-mark img {
   width: 48px;
   height: 48px;
   object-fit: cover;
