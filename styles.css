@@ -197,6 +197,7 @@ svg {
 .ticker-stack,
 .base-strip,
 .wallets-section,
+.available-section,
 .connect-dock,
 .podcast-section,
 .community {
@@ -580,6 +581,7 @@ dd {
 
 .base-strip,
 .wallets-section,
+.available-section,
 .connect-dock,
 .podcast-section,
 .community {
@@ -1078,6 +1080,136 @@ dd {
   text-decoration-color: currentColor;
 }
 
+.available-section .section-heading p:not(.eyebrow) {
+  max-width: 820px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.available-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.available-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-content: space-between;
+  min-height: 260px;
+  gap: 18px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(circle at 14% 10%, rgba(52, 125, 255, 0.16), transparent 10rem),
+    radial-gradient(circle at 86% 14%, rgba(239, 64, 86, 0.12), transparent 10rem),
+    rgba(255, 255, 255, 0.055);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.available-card::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 44%, rgba(52, 125, 255, 0.14));
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.available-card:hover,
+.available-card:focus-within {
+  transform: translateY(-2px);
+  border-color: rgba(142, 197, 255, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.available-card:hover::before,
+.available-card:focus-within::before {
+  opacity: 1;
+}
+
+.available-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.available-card-topline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.platform-mark {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.platform-mark img {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.dexscreener-mark {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.18), transparent 1.5rem),
+    rgba(8, 17, 35, 0.94);
+}
+
+.dexscreener-mark img {
+  width: 34px;
+  height: 38px;
+}
+
+.dexpaprika-mark {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.18), transparent 1.5rem),
+    rgba(5, 5, 7, 0.94);
+}
+
+.dexpaprika-mark img {
+  width: 34px;
+  height: 34px;
+}
+
+.geckoterminal-mark {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.18), transparent 1.5rem),
+    rgba(13, 14, 24, 0.94);
+}
+
+.geckoterminal-mark img {
+  width: 35px;
+  height: 35px;
+}
+
+.available-card h3 {
+  margin-bottom: 0;
+  font-size: 1.45rem;
+}
+
+.available-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 .wallet-card small {
   color: rgba(173, 187, 207, 0.76);
   font-size: 0.76rem;
@@ -1441,6 +1573,7 @@ dd {
   .base-grid,
   .story-grid,
   .wallets-grid,
+  .available-grid,
   .social-grid {
     grid-template-columns: 1fr;
   }
