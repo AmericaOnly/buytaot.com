@@ -1166,6 +1166,17 @@ dd {
   object-fit: contain;
 }
 
+.coinmarketcap-mark {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.2), transparent 1.5rem),
+    rgba(247, 250, 255, 0.96);
+}
+
+.coinmarketcap-mark img {
+  width: 34px;
+  height: 34px;
+}
+
 .dexscreener-mark {
   background:
     radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.18), transparent 1.5rem),
