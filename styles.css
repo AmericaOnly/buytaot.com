@@ -405,6 +405,21 @@ h3 {
   box-shadow: 0 20px 48px rgba(239, 64, 86, 0.18), 0 0 34px rgba(52, 125, 255, 0.2);
 }
 
+.button-brand-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.coingecko-button-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .button.full {
   width: 100%;
 }
