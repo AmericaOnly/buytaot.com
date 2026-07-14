@@ -1225,6 +1225,17 @@ dd {
   height: 35px;
 }
 
+.phemex-mark {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.2), transparent 1.5rem),
+    rgba(247, 250, 255, 0.96);
+}
+
+.phemex-mark img {
+  width: 30px;
+  height: 30px;
+}
+
 .available-card h3 {
   margin-bottom: 0;
   font-size: 1.45rem;
