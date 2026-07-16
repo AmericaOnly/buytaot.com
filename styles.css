@@ -811,6 +811,15 @@ dd {
   transform: scale(1.01);
 }
 
+.video-thumb img.soft-thumb {
+  opacity: 0.78;
+}
+
+.video-thumb:hover img.soft-thumb,
+.video-thumb:focus-visible img.soft-thumb {
+  opacity: 0.92;
+}
+
 .play-icon {
   position: absolute;
   top: 50%;
