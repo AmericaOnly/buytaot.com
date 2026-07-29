@@ -1245,6 +1245,28 @@ dd {
   height: 30px;
 }
 
+.birdeye-mark {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.18), transparent 1.5rem),
+    rgba(10, 21, 34, 0.96);
+}
+
+.birdeye-mark img {
+  width: 35px;
+  height: 35px;
+}
+
+.coinstats-mark {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.18), transparent 1.5rem),
+    rgba(247, 250, 255, 0.96);
+}
+
+.coinstats-mark img {
+  width: 35px;
+  height: 35px;
+}
+
 .available-card h3 {
   margin-bottom: 0;
   font-size: 1.45rem;

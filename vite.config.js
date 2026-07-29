@@ -7,6 +7,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: resolve(__dirname, "index.html"),
+        wallets: resolve(__dirname, "wallets.html"),
+        available: resolve(__dirname, "available.html"),
         podcast: resolve(__dirname, "podcast.html"),
       },
     },

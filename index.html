@@ -33,18 +33,18 @@
 
     <div class="layout-shell">
       <aside class="side-rail" aria-label="TAOT navigation">
-        <a class="rail-brand" href="#top" aria-label="TAOT home">
+        <a class="rail-brand" href="index.html" aria-label="TAOT home">
           <img class="brand-logo" src="/images/taot.png" alt="TAOT logo">
           <span>TAOT</span>
         </a>
         <nav class="rail-nav">
-          <a href="#token">Token</a>
-          <a href="#base">Base Network</a>
-          <a href="#wallets">Wallets</a>
-          <a href="#available">Available On</a>
-          <a href="#connect">Get TAOT</a>
+          <a href="index.html#token">Token</a>
+          <a href="index.html#base">Base Network</a>
+          <a href="wallets.html">Wallets</a>
+          <a href="available.html">Available On</a>
+          <a href="index.html#connect">Get TAOT</a>
           <a href="podcast.html">Podcast</a>
-          <a href="#community">Social</a>
+          <a href="#community">Social Media</a>
           <a href="https://whitepaper.buytaot.com" target="_blank" rel="noreferrer">Whitepaper</a>
         </nav>
         <button class="wallet-button" id="connectWallet" type="button">
@@ -179,224 +179,7 @@
           </div>
         </section>
 
-        <section class="wallets-section" id="wallets" aria-labelledby="wallets-title">
-          <div class="section-heading">
-            <p class="eyebrow">Wallet compatibility</p>
-            <h2 id="wallets-title">Add TAOT to wallets that support Base Network tokens.</h2>
-            <p>TAOT is an ERC-20 token on Base Network. These are the most popular wallets that support storing TAOT.</p>
-          </div>
-
-          <div class="wallets-grid" aria-label="Wallet options for TAOT">
-            <article class="wallet-card featured-wallet">
-              <div class="wallet-card-topline">
-                <span class="wallet-mark"><img src="https://metamask.io/favicons/default/favicon.svg" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
-                <span>Browser extension and mobile app</span>
-              </div>
-              <h3>MetaMask</h3>
-              <p>Connect MetaMask, switch to Base Network, then add TAOT using the verified contract address. The button below uses MetaMask's standard token import prompt when available.</p>
-              <div class="wallet-actions">
-                <button class="button primary" id="addToMetaMask" type="button">
-                  <span>Add to MetaMask</span>
-                  <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M11 4h2v7h7v2h-7v7h-2v-7H4v-2h7V4Z"/></svg>
-                </button>
-                <a class="button ghost" href="https://metamask.io/download/" target="_blank" rel="noreferrer">Download</a>
-              </div>
-              <small id="addTokenState">No transaction is requested. Your wallet will ask before importing the token.</small>
-            </article>
-
-            <article class="wallet-card">
-              <div class="wallet-card-topline">
-                <span class="wallet-mark"><img src="https://base.app/static-open-graph/v1/favicon.png" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
-                <span>Base ecosystem wallet</span>
-              </div>
-              <h3>Base Wallet</h3>
-              <p>Use Base Wallet with Base Network selected, then search for TAOT or import the token with the contract address shown on this site.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://base.app/" target="_blank" rel="noreferrer">Download</a>
-                <a class="wallet-mini-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify contract</a>
-              </div>
-            </article>
-
-            <article class="wallet-card">
-              <div class="wallet-card-topline">
-                <span class="wallet-mark"><img src="https://trustwallet.com/icon.svg" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
-                <span>Mobile and browser wallet</span>
-              </div>
-              <h3>Trust Wallet</h3>
-              <p>Open Trust Wallet, choose Base Network, and import TAOT as a custom token using the verified contract address.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://trustwallet.com/download" target="_blank" rel="noreferrer">Download</a>
-                <a class="wallet-mini-link" href="#token">Copy contract</a>
-              </div>
-            </article>
-
-            <article class="wallet-card">
-              <div class="wallet-card-topline">
-                <span class="wallet-mark coinbase-mark"><img src="https://www.coinbase.com/favicon.ico" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
-                <span>Coinbase wallet app and extension</span>
-              </div>
-              <h3>Coinbase Wallet</h3>
-              <p>Use Coinbase Wallet or Base App with Base Network selected, then import TAOT with the verified contract address if it is not shown automatically.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://www.coinbase.com/wallet/downloads" target="_blank" rel="noreferrer">Download</a>
-                <a class="wallet-mini-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify contract</a>
-              </div>
-            </article>
-
-            <article class="wallet-card">
-              <div class="wallet-card-topline">
-                <span class="wallet-mark okx-mark"><img src="https://www.okx.com/favicon.ico" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
-                <span>Multi-chain Web3 wallet</span>
-              </div>
-              <h3>OKX Wallet</h3>
-              <p>Open OKX Wallet, switch to Base Network, and add TAOT as a custom token using the contract address from the token details section.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://web3.okx.com/" target="_blank" rel="noreferrer">Download</a>
-                <a class="wallet-mini-link" href="#token">Copy contract</a>
-              </div>
-            </article>
-
-            <article class="wallet-card">
-              <div class="wallet-card-topline">
-                <span class="wallet-mark phantom-mark"><img src="/images/wallets/phantom.svg" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
-                <span>Mobile and browser wallet</span>
-              </div>
-              <h3>Phantom Wallet</h3>
-              <p>Use Phantom on mobile or browser extension, choose Base Network, and import TAOT with the verified contract address if needed.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://phantom.com/download" target="_blank" rel="noreferrer">Download</a>
-                <a class="wallet-mini-link" href="#token">Copy contract</a>
-              </div>
-            </article>
-
-            <article class="wallet-card">
-              <div class="wallet-card-topline">
-                <span class="wallet-mark ledger-mark"><img src="https://shop.ledger.com/ledger-logo-short-white.svg" alt="" loading="lazy" referrerpolicy="no-referrer"></span>
-                <span>Hardware wallet workflow</span>
-              </div>
-              <h3>Ledger</h3>
-              <p>Use Ledger Live or connect Ledger through a compatible EVM wallet, select Base Network, and verify the TAOT contract before receiving tokens.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://www.ledger.com/ledger-live/download" target="_blank" rel="noreferrer">Download</a>
-                <a class="wallet-mini-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify contract</a>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section class="available-section" id="available" aria-labelledby="available-title">
-          <div class="section-heading">
-            <p class="eyebrow">Availability</p>
-            <h2 id="available-title">Track TAOT on supported Web3 platforms.</h2>
-            <p>These tools can help users view TAOT balances, token data, and Base Network activity where supported. Listings and integrations are informational and do not imply a partnership or endorsement.</p>
-          </div>
-
-          <div class="available-grid" aria-label="Platforms where TAOT can be tracked">
-            <article class="available-card">
-              <div class="available-card-topline">
-                <span class="platform-mark debank-mark"><img src="/images/platforms/debank.ico" alt="" loading="lazy"></span>
-                <span>Portfolio tracker</span>
-              </div>
-              <h3>DeBank</h3>
-              <p>TAOT is now available on DeBank for Base Network portfolio tracking, token balance checks, and wallet activity views.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://debank.com/token/base/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e/group" target="_blank" rel="noreferrer">Open DeBank</a>
-                <a class="wallet-mini-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify contract</a>
-              </div>
-            </article>
-
-            <article class="available-card">
-              <div class="available-card-topline">
-                <span class="platform-mark dextools-mark"><img src="/images/platforms/dextools.svg" alt="" loading="lazy"></span>
-                <span>DEX analytics</span>
-              </div>
-              <h3>DEXTools</h3>
-              <p>Track TAOT price action, pair data, charts, and trading activity through DEXTools where the Base token page is supported.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://www.dextools.io/app/token/taot" target="_blank" rel="noreferrer">Open DEXTools</a>
-                <a class="wallet-mini-link" href="https://www.dextools.io/app/base/pair-explorer/0xc4fbb564d11a36b71d0152a1a8cddec709e20908" target="_blank" rel="noreferrer">Pair chart</a>
-              </div>
-            </article>
-
-            <article class="available-card">
-              <div class="available-card-topline">
-                <span class="platform-mark coinmarketcap-mark"><img src="/images/platforms/coinmarketcap.svg" alt="" loading="lazy"></span>
-                <span>DEX token data</span>
-              </div>
-              <h3>CoinMarketCap DEX</h3>
-              <p>View TAOT on CoinMarketCap DEX for Base Network token data, live charting, trading activity, and market context.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://dex.coinmarketcap.com/token/base/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e/" target="_blank" rel="noreferrer">Open CMC DEX</a>
-                <a class="wallet-mini-link" href="https://coinmarketcap.com/currencies/the-america-only-token/" target="_blank" rel="noreferrer">CMC listing</a>
-              </div>
-            </article>
-
-            <article class="available-card">
-              <div class="available-card-topline">
-                <span class="platform-mark dexscreener-mark"><img src="/images/platforms/dexscreener.svg" alt="" loading="lazy"></span>
-                <span>DEX charts</span>
-              </div>
-              <h3>Dexscreener</h3>
-              <p>View TAOT pair charts, liquidity, trading volume, and market activity on Dexscreener for the Base Network pair.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://dexscreener.com/base/0xc4fbb564d11a36b71d0152a1a8cddec709e20908" target="_blank" rel="noreferrer">Open Dexscreener</a>
-                <a class="wallet-mini-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify contract</a>
-              </div>
-            </article>
-
-            <article class="available-card">
-              <div class="available-card-topline">
-                <span class="platform-mark dexpaprika-mark"><img src="/images/platforms/dexpaprika.svg" alt="" loading="lazy"></span>
-                <span>DEX market data</span>
-              </div>
-              <h3>DexPaprika</h3>
-              <p>View TAOT live on-chain price, liquidity, volume, transactions, and pool data on DexPaprika for Base Network.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://dexpaprika.com/base/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Open DexPaprika</a>
-                <a class="wallet-mini-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify contract</a>
-              </div>
-            </article>
-
-            <article class="available-card">
-              <div class="available-card-topline">
-                <span class="platform-mark geckoterminal-mark"><img src="/images/platforms/geckoterminal.svg" alt="" loading="lazy"></span>
-                <span>DEX market data</span>
-              </div>
-              <h3>GeckoTerminal</h3>
-              <p>Track the TAOT/USDC Base Network pool with GeckoTerminal charts, liquidity, volume, transactions, and pool context.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://www.geckoterminal.com/base/pools/0xc4fbb564d11a36b71d0152a1a8cddec709e20908" target="_blank" rel="noreferrer">Open GeckoTerminal</a>
-                <a class="wallet-mini-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify contract</a>
-              </div>
-            </article>
-
-            <article class="available-card">
-              <div class="available-card-topline">
-                <span class="platform-mark okx-mark"><img src="/images/platforms/okx.svg" alt="" loading="lazy"></span>
-                <span>Web3 token page</span>
-              </div>
-              <h3>OKX Web3</h3>
-              <p>Open the TAOT Base Network token page on OKX Web3 to view supported token data, market context, and wallet access.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://web3.okx.com/token/base/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e?ref=COINGECKOREF" target="_blank" rel="noreferrer">Open OKX Web3</a>
-                <a class="wallet-mini-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify contract</a>
-              </div>
-            </article>
-
-            <article class="available-card">
-              <div class="available-card-topline">
-                <span class="platform-mark phemex-mark"><img src="/images/platforms/phemex.ico" alt="" loading="lazy"></span>
-                <span>Exchange price page</span>
-              </div>
-              <h3>Phemex</h3>
-              <p>View TAOT on Phemex for token price information, market context, and exchange availability where supported.</p>
-              <div class="wallet-actions">
-                <a class="button ghost" href="https://phemex.com/price/taot" target="_blank" rel="noreferrer">Open Phemex</a>
-                <a class="wallet-mini-link" href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify contract</a>
-              </div>
-            </article>
-          </div>
-        </section>
+        
 
         <section class="connect-dock" id="connect" aria-labelledby="wallet-title">
           <div class="dock-copy">
@@ -413,7 +196,7 @@
         <section class="community" id="community" aria-labelledby="community-title">
           <div class="section-heading compact">
             <p class="eyebrow">Official channels</p>
-            <h2 id="community-title">TAOT Socials</h2>
+            <h2 id="community-title">TAOT Social Media</h2>
           </div>
           <div class="social-grid" aria-label="Social media links">
             <a class="social-link" href="https://x.com/buytaot" target="_blank" rel="noreferrer"><span class="social-icon" data-brand-icon="x">X</span><span>X</span></a>
