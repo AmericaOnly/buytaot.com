@@ -478,13 +478,13 @@ h3 {
 
 .token-logo-stage::before {
   position: absolute;
-  inset: 5%;
+  inset: 7%;
   content: "";
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.42), rgba(239, 64, 86, 0.24) 48%, transparent 72%);
-  filter: blur(24px);
-  opacity: 0.72;
-  animation: logoPulse 5.5s ease-in-out infinite;
+  background-color: rgba(239, 64, 86, 0.62);
+  filter: blur(32px);
+  opacity: 0.78;
+  animation: logoPulse 12s ease-in-out infinite;
 }
 
 .token-logo-large {
@@ -1585,19 +1585,30 @@ dd {
 
 @keyframes logoPulse {
   0%,
+  18%,
   100% {
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.38), rgba(239, 64, 86, 0.2) 48%, transparent 72%);
-    opacity: 0.58;
-    transform: scale(0.96);
+    background-color: rgba(239, 64, 86, 0.72);
+    box-shadow: 0 0 72px rgba(239, 64, 86, 0.38), 0 0 120px rgba(239, 64, 86, 0.18);
+    opacity: 0.82;
+    transform: scale(0.99);
   }
 
-  50% {
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.5), rgba(239, 64, 86, 0.34) 50%, transparent 74%);
-    opacity: 0.88;
-    transform: scale(1.04);
+  30%,
+  48% {
+    background-color: rgba(255, 255, 255, 0.76);
+    box-shadow: 0 0 78px rgba(255, 255, 255, 0.42), 0 0 132px rgba(255, 255, 255, 0.2);
+    opacity: 0.86;
+    transform: scale(1.02);
+  }
+
+  60%,
+  82% {
+    background-color: rgba(52, 125, 255, 0.72);
+    box-shadow: 0 0 76px rgba(52, 125, 255, 0.42), 0 0 128px rgba(52, 125, 255, 0.2);
+    opacity: 0.84;
+    transform: scale(1.01);
   }
 }
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
