@@ -1267,6 +1267,17 @@ dd {
   height: 35px;
 }
 
+.arkham-mark {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.18), transparent 1.5rem),
+    rgba(8, 14, 28, 0.96);
+}
+
+.arkham-mark img {
+  width: 38px;
+  height: 38px;
+}
+
 .available-card h3 {
   margin-bottom: 0;
   font-size: 1.45rem;
