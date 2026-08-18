@@ -10,6 +10,7 @@ export default defineConfig({
         wallets: resolve(__dirname, "wallets.html"),
         available: resolve(__dirname, "available.html"),
         podcast: resolve(__dirname, "podcast.html"),
+        privacy: resolve(__dirname, "privacy/index.html"),
       },
     },
   },
