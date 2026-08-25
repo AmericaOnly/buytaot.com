@@ -29,7 +29,10 @@ const tokenSymbol = "TAOT";
 const tokenDecimals = 18;
 const tokenImageUrl = "https://buytaot.com/images/taot.png";
 const baseChainId = "0x2105";
-const pairDataUrl = "https://api.dexscreener.com/latest/dex/pairs/base/0xc4fbb564d11a36b71d0152a1a8cddec709e20908";
+const pairDataUrls = [
+  "https://api.dexscreener.com/latest/dex/pairs/base/0xc4fbb564d11a36b71d0152a1a8cddec709e20908",
+  "https://api.dexscreener.com/latest/dex/pairs/base/0x680e8b2aec41ad28e067d066fa5953a514e72550",
+];
 
 const copyButton = document.querySelector("#copyContract");
 const copyState = document.querySelector("#copyState");
@@ -197,22 +200,38 @@ function updateMarketText(selector, value) {
   });
 }
 
+async function fetchPairData(url) {
+  const response = await fetch(url, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error("Pair request failed");
+  }
+
+  const data = await response.json();
+  return data.pair || data.pairs?.[0] || null;
+}
+
 async function updateMarketData() {
   try {
-    const response = await fetch(pairDataUrl, { cache: "no-store" });
-    if (!response.ok) {
-      throw new Error("Pair request failed");
-    }
+    const pairResults = await Promise.allSettled(pairDataUrls.map(fetchPairData));
+    const pairs = pairResults
+      .filter((result) => result.status === "fulfilled" && result.value)
+      .map((result) => result.value);
 
-    const data = await response.json();
-    const pair = data.pair || data.pairs?.[0];
-    if (!pair) {
+    if (!pairs.length) {
       throw new Error("Pair data unavailable");
     }
 
-    const price = formatUsd(pair.priceUsd, { microDecimals: 6, maximumFractionDigits: 6 });
-    const liquidity = formatUsd(pair.liquidity?.usd, { compact: true });
-    const volume = formatUsd(pair.volume?.h24, { compact: true });
+    const primaryPair = pairs.reduce((best, pair) => {
+      const bestLiquidity = Number(best?.liquidity?.usd) || 0;
+      const pairLiquidity = Number(pair?.liquidity?.usd) || 0;
+      return pairLiquidity > bestLiquidity ? pair : best;
+    }, pairs[0]);
+    const totalLiquidity = pairs.reduce((sum, pair) => sum + (Number(pair.liquidity?.usd) || 0), 0);
+    const totalVolume = pairs.reduce((sum, pair) => sum + (Number(pair.volume?.h24) || 0), 0);
+
+    const price = formatUsd(primaryPair.priceUsd, { microDecimals: 6, maximumFractionDigits: 6 });
+    const liquidity = formatUsd(totalLiquidity, { compact: true });
+    const volume = formatUsd(totalVolume, { compact: true });
 
     const livePrice = document.querySelector("#livePrice");
     if (livePrice) {
