@@ -11,6 +11,12 @@ const brandIcons = {
 
 function renderBrandIcons() {
   document.querySelectorAll("[data-brand-icon]").forEach((target) => {
+    if (target.dataset.brandIcon === "zoom") {
+      target.setAttribute("aria-label", "Zoom");
+      target.innerHTML = "<span class='zoom-mark' aria-hidden='true'>Z</span>";
+      return;
+    }
+
     const icon = brandIcons[target.dataset.brandIcon];
     if (!icon) {
       return;
@@ -29,8 +35,9 @@ const tokenSymbol = "TAOT";
 const tokenDecimals = 18;
 const tokenImageUrl = "https://buytaot.com/images/taot.png";
 const baseChainId = "0x2105";
+const lockedPairAddress = "0xc4fbb564d11a36b71d0152a1a8cddec709e20908";
 const pairDataUrls = [
-  "https://api.dexscreener.com/latest/dex/pairs/base/0xc4fbb564d11a36b71d0152a1a8cddec709e20908",
+  `https://api.dexscreener.com/latest/dex/pairs/base/${lockedPairAddress}`,
   "https://api.dexscreener.com/latest/dex/pairs/base/0x680e8b2aec41ad28e067d066fa5953a514e72550",
 ];
 
@@ -226,11 +233,13 @@ async function updateMarketData() {
       const pairLiquidity = Number(pair?.liquidity?.usd) || 0;
       return pairLiquidity > bestLiquidity ? pair : best;
     }, pairs[0]);
+    const lockedPair = pairs.find((pair) => pair.pairAddress?.toLowerCase() === lockedPairAddress);
     const totalLiquidity = pairs.reduce((sum, pair) => sum + (Number(pair.liquidity?.usd) || 0), 0);
     const totalVolume = pairs.reduce((sum, pair) => sum + (Number(pair.volume?.h24) || 0), 0);
 
     const price = formatUsd(primaryPair.priceUsd, { microDecimals: 6, maximumFractionDigits: 6 });
     const liquidity = formatUsd(totalLiquidity, { compact: true });
+    const lockedLiquidity = formatUsd(lockedPair?.liquidity?.usd, { compact: true });
     const volume = formatUsd(totalVolume, { compact: true });
 
     const livePrice = document.querySelector("#livePrice");
@@ -239,6 +248,7 @@ async function updateMarketData() {
     }
     updateMarketText("[data-market-price]", price);
     updateMarketText("[data-market-liquidity]", liquidity);
+    updateMarketText("[data-locked-liquidity]", lockedLiquidity);
     updateMarketText("[data-market-volume]", volume);
   } catch {
     updateMarketText("[data-market-price]", "Price unavailable");
