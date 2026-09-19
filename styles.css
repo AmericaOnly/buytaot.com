@@ -146,6 +146,49 @@ svg {
   color: #ffffff;
 }
 
+.language-picker {
+  display: grid;
+  gap: 6px;
+  padding: 8px 10px 0;
+}
+
+.language-picker label {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.language-picker select {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 30px 0 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 11px;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: #0b1730;
+  cursor: pointer;
+}
+
+.language-picker select:focus-visible {
+  outline: 2px solid var(--blue-soft);
+  outline-offset: 2px;
+}
+
+#google_translate_element,
+.goog-te-banner-frame,
+.skiptranslate iframe {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
 .wallet-button,
 .button,
 .contract-copy {
@@ -1988,6 +2031,11 @@ dd {
   .rail-nav a {
     flex: 0 0 auto;
     white-space: nowrap;
+  }
+
+  .language-picker {
+    flex: 0 0 150px;
+    padding-top: 4px;
   }
 
   .hero-grid,

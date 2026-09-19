@@ -1,5 +1,92 @@
 import { siFacebook, siInstagram, siLinktree, siTelegram, siX, siYoutube } from "simple-icons";
 
+const supportedLanguages = ["en", "es", "zh-CN"];
+const languageStorageKey = "taot-language";
+
+function detectPreferredLanguage() {
+  const browserLanguage = navigator.languages?.[0] || navigator.language || "en";
+  const normalized = browserLanguage.toLowerCase();
+
+  if (normalized.startsWith("es")) {
+    return "es";
+  }
+
+  if (normalized.startsWith("zh")) {
+    return "zh-CN";
+  }
+
+  return "en";
+}
+
+function readSavedLanguage() {
+  try {
+    const savedLanguage = window.localStorage.getItem(languageStorageKey);
+    return supportedLanguages.includes(savedLanguage) ? savedLanguage : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveLanguage(language) {
+  try {
+    window.localStorage.setItem(languageStorageKey, language);
+  } catch {
+    // Translation still works when browser storage is unavailable.
+  }
+}
+
+function setTranslationCookie(language) {
+  const cookieValue = language === "en" ? "" : `/en/${language}`;
+  const expiration = language === "en" ? "; expires=Thu, 01 Jan 1970 00:00:00 GMT" : "; max-age=31536000";
+  const cookie = `googtrans=${cookieValue}; path=/${expiration}; SameSite=Lax`;
+  document.cookie = cookie;
+
+  if (location.hostname === "buytaot.com" || location.hostname.endsWith(".buytaot.com")) {
+    document.cookie = `${cookie}; domain=.buytaot.com`;
+  }
+}
+
+function initializeLanguageSelector() {
+  const selector = document.querySelector("[data-language-select]");
+  if (!selector) {
+    return;
+  }
+
+  const savedLanguage = readSavedLanguage();
+  const selectedLanguage = savedLanguage || detectPreferredLanguage();
+  if (!savedLanguage) {
+    saveLanguage(selectedLanguage);
+  }
+  selector.value = selectedLanguage;
+  setTranslationCookie(selectedLanguage);
+
+  selector.addEventListener("change", () => {
+    const language = supportedLanguages.includes(selector.value) ? selector.value : "en";
+    saveLanguage(language);
+    setTranslationCookie(language);
+    location.reload();
+  });
+
+  window.googleTranslateElementInit = () => {
+    if (!window.google?.translate?.TranslateElement) {
+      return;
+    }
+
+    new window.google.translate.TranslateElement({
+      pageLanguage: "en",
+      includedLanguages: "en,es,zh-CN",
+      autoDisplay: false,
+    }, "google_translate_element");
+  };
+
+  const script = document.createElement("script");
+  script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+  script.async = true;
+  document.head.append(script);
+}
+
+initializeLanguageSelector();
+
 const brandIcons = {
   facebook: siFacebook,
   instagram: siInstagram,
