@@ -11,6 +11,7 @@ export default defineConfig({
         available: resolve(__dirname, "available.html"),
         podcast: resolve(__dirname, "podcast.html"),
         tokenization: resolve(__dirname, "tokenization.html"),
+        tokenomics: resolve(__dirname, "tokenomics.html"),
         privacy: resolve(__dirname, "privacy/index.html"),
       },
     },

@@ -96,6 +96,7 @@ svg {
   position: sticky;
   top: 0;
   display: flex;
+  overflow-y: auto;
   height: 100vh;
   flex-direction: column;
   justify-content: space-between;
@@ -242,6 +243,7 @@ body {
 .wallets-section,
 .available-section,
 .tokenization-section,
+.tokenomics-section,
 .connect-dock,
 .podcast-section,
 .community {
@@ -683,6 +685,7 @@ dd {
 .wallets-section,
 .available-section,
 .tokenization-section,
+.tokenomics-section,
 .connect-dock,
 .podcast-section,
 .community {
@@ -769,6 +772,166 @@ dd {
 .tokenization-contact .button {
   flex: 0 0 auto;
   white-space: nowrap;
+}
+
+.tokenomics-heading {
+  max-width: 930px;
+}
+
+.tokenomics-heading h1 {
+  font-size: clamp(2.7rem, 5.4vw, 5.5rem);
+  line-height: 1;
+}
+
+.tokenomics-heading > p:not(.eyebrow),
+.disclosure-block .section-heading > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 1.04rem;
+  line-height: 1.7;
+}
+
+.snapshot-date {
+  font-size: 0.86rem !important;
+  font-weight: 700;
+}
+
+.tokenomics-metrics,
+.wallet-map-grid,
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.tokenomics-metrics article,
+.disclosure-card,
+.status-note {
+  padding: clamp(20px, 3vw, 30px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(5, 12, 28, 0.64);
+}
+
+.tokenomics-metrics article {
+  display: grid;
+  gap: 8px;
+}
+
+.tokenomics-metrics span,
+.tokenomics-metrics small {
+  color: var(--muted);
+}
+
+.tokenomics-metrics span,
+.disclosure-tag {
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tokenomics-metrics strong {
+  font-size: clamp(1.35rem, 2.3vw, 2.2rem);
+}
+
+.disclosure-block {
+  margin-top: 36px;
+}
+
+.disclosure-block h2 {
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+}
+
+.disclosure-card h3 {
+  margin-top: 12px;
+  font-size: 1.3rem;
+}
+
+.disclosure-card p,
+.status-note p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.disclosure-tag {
+  color: var(--blue-soft);
+}
+
+.address-link,
+.evidence-links a,
+.allocation-table a {
+  color: var(--blue-soft);
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.address-link:hover,
+.address-link:focus-visible,
+.evidence-links a:hover,
+.evidence-links a:focus-visible,
+.allocation-table a:hover,
+.allocation-table a:focus-visible {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.evidence-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  font-size: 0.86rem;
+}
+
+.allocation-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+.allocation-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  background: rgba(5, 12, 28, 0.64);
+}
+
+.allocation-table th,
+.allocation-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.allocation-table th {
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.allocation-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.status-note {
+  margin-top: 16px;
+}
+
+.status-note strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.15rem;
+}
+
+.pending-note {
+  border-color: rgba(245, 158, 11, 0.34);
+  background: linear-gradient(120deg, rgba(245, 158, 11, 0.1), rgba(5, 12, 28, 0.7));
+}
+
+.liquidity-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .story-grid {
@@ -2010,6 +2173,7 @@ dd {
     padding: 12px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
+    overflow-y: visible;
   }
 
   .rail-brand {
@@ -2064,6 +2228,12 @@ dd {
   }
 
   .tokenization-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tokenomics-metrics,
+  .wallet-map-grid,
+  .controls-grid {
     grid-template-columns: 1fr;
   }
 
