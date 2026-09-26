@@ -104,7 +104,7 @@
               <span class="lesson-number">Lesson 04</span>
               <h2>Wallets and self-custody</h2>
               <p>A wallet manages the keys used to authorize blockchain transactions. A public wallet address can safely be shared to receive tokens. A private key or recovery phrase must remain secret because it provides control over the wallet.</p>
-              <p>Self-custody means the wallet owner controls those keys and is responsible for protecting them. Store recovery information offline, check addresses carefully, and never enter a recovery phrase into a website reached through an unexpected message.</p>
+              <p>Self-custody means the wallet owner controls those keys and is responsible for protecting them. If you lose the 18-word recovery phrase for your TAOT app wallet, the TAOT team cannot retrieve the wallet or its tokens. Store recovery information offline, check addresses carefully, and never enter a recovery phrase into a website reached through an unexpected message.</p>
               <div class="lesson-callout"><strong>Core rule:</strong> TAOT representatives will never need your private key or recovery phrase.</div>
               <div class="lesson-links"><a href="wallets.html">View compatible wallets</a></div>
             </article>
@@ -114,6 +114,7 @@
               <h2>Transactions and gas</h2>
               <p>A blockchain transaction is a signed instruction, such as sending a token or approving a swap. Base charges a small network fee, commonly called gas, which is paid in ETH. Gas pays the network to process the transaction; it is separate from the token being transferred.</p>
               <p>Transactions are generally irreversible. Review the network, destination address, token, amount, and wallet prompt before approving.</p>
+              <p>Always send a small test transaction before transferring a large amount of any token. Confirm that the test arrives at the intended wallet on the correct network before sending the remaining amount.</p>
               <p>After submission, a transaction receives a unique transaction hash. That hash can be searched on a block explorer to confirm whether the transaction is pending, successful, or failed.</p>
             </article>
 
@@ -171,7 +172,7 @@
           </section>
 
           <div class="university-next graduation-cta">
-            <div><p class="eyebrow">Graduation exam</p><h2>Put your TAOT knowledge to the test.</h2><p>Answer 12 questions drawn directly from the lessons above. A score of 10 or more earns a passing grade, and you can retake the exam at any time.</p></div>
+            <div><p class="eyebrow">Graduation exam</p><h2>Put your TAOT knowledge to the test.</h2><p>Answer 13 questions drawn directly from the lessons above. A score of 11 or more earns a passing grade, and you can retake the exam at any time.</p></div>
             <button class="button primary graduation-exam-link" id="openGraduationExam" type="button">Are you ready to take the TAOT University Graduation Exam?</button>
           </div>
         </section>
@@ -183,7 +184,7 @@
               <button class="exam-close" id="closeGraduationExam" type="button" aria-label="Close graduation exam">&times;</button>
             </header>
             <form id="graduationExamForm">
-              <p class="exam-intro">Choose one answer for each question. You need 10 of 12 correct to pass.</p>
+              <p class="exam-intro">Choose one answer for each question. You need 11 of 13 correct to pass.</p>
 
               <fieldset class="exam-question"><legend>1. Which network is TAOT deployed on?</legend><label class="exam-option"><input type="radio" name="q1" value="ethereum"> Ethereum mainnet</label><label class="exam-option"><input type="radio" name="q1" value="base"> Base</label><label class="exam-option"><input type="radio" name="q1" value="bitcoin"> Bitcoin</label></fieldset>
               <fieldset class="exam-question"><legend>2. What is TAOT's maximum token supply?</legend><label class="exam-option"><input type="radio" name="q2" value="25m"> 25 million</label><label class="exam-option"><input type="radio" name="q2" value="250m"> 250 million</label><label class="exam-option"><input type="radio" name="q2" value="unlimited"> Unlimited</label></fieldset>
@@ -196,10 +197,16 @@
               <fieldset class="exam-question"><legend>9. Smart contracts execute defined rules when their functions are called.</legend><label class="exam-option"><input type="radio" name="q9" value="true"> True</label><label class="exam-option"><input type="radio" name="q9" value="false"> False</label></fieldset>
               <fieldset class="exam-question"><legend>10. What does a token approval do?</legend><label class="exam-option"><input type="radio" name="q10" value="ownership"> Transfers ownership of your wallet</label><label class="exam-option"><input type="radio" name="q10" value="allowance"> Lets a specific contract spend up to an allowed token amount</label><label class="exam-option"><input type="radio" name="q10" value="gas"> Eliminates gas fees</label></fieldset>
               <fieldset class="exam-question"><legend>11. Existing token approvals can be reviewed and revoked.</legend><label class="exam-option"><input type="radio" name="q11" value="true"> True</label><label class="exam-option"><input type="radio" name="q11" value="false"> False</label></fieldset>
-              <fieldset class="exam-question"><legend>12. Before bridging, what should you verify?</legend><label class="exam-option"><input type="radio" name="q12" value="speed"> Only the estimated speed</label><label class="exam-option"><input type="radio" name="q12" value="networks"> Only the destination network</label><label class="exam-option"><input type="radio" name="q12" value="all"> The official bridge, both networks, token, and destination contract</label></fieldset>
+              <fieldset class="exam-question"><legend>12. The TAOT team can help retrieve your tokens in the app if you lose your 18-word recovery phrase.</legend><label class="exam-option"><input type="radio" name="q12" value="true"> True</label><label class="exam-option"><input type="radio" name="q12" value="false"> False</label></fieldset>
+              <fieldset class="exam-question"><legend>13. You should always do a test transaction before sending a large amount of any token.</legend><label class="exam-option"><input type="radio" name="q13" value="true"> True</label><label class="exam-option"><input type="radio" name="q13" value="false"> False</label></fieldset>
 
               <div class="exam-actions"><button class="button primary" type="submit">Grade my exam</button><button class="button secondary" id="resetGraduationExam" type="reset">Retake exam</button></div>
               <div class="exam-result" id="examResult" role="status" aria-live="polite"></div>
+              <section class="exam-review" id="examReview" aria-labelledby="examReviewTitle">
+                <h3 id="examReviewTitle">Review your incorrect answers</h3>
+                <p>Use these corrections to review the related lessons before trying again.</p>
+                <ol id="examReviewList"></ol>
+              </section>
             </form>
           </div>
         </dialog>

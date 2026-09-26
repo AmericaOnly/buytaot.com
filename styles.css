@@ -1223,6 +1223,60 @@ dd {
   background: rgba(239, 64, 86, 0.1);
 }
 
+.exam-review {
+  display: none;
+  margin-top: 18px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.exam-review.visible {
+  display: block;
+}
+
+.exam-review h3 {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+}
+
+.exam-review > p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.exam-review ol {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding-left: 24px;
+}
+
+.exam-review li {
+  padding-left: 4px;
+  line-height: 1.5;
+}
+
+.exam-review-question,
+.exam-review-answer {
+  display: block;
+}
+
+.exam-review-question {
+  margin-bottom: 5px;
+  color: var(--muted);
+}
+
+.exam-review-answer {
+  color: #baf5d9;
+  font-weight: 750;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
 .story-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

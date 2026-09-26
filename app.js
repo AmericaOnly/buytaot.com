@@ -397,8 +397,10 @@ function initializeGraduationExam() {
   const closeButton = document.querySelector("#closeGraduationExam");
   const form = document.querySelector("#graduationExamForm");
   const result = document.querySelector("#examResult");
+  const review = document.querySelector("#examReview");
+  const reviewList = document.querySelector("#examReviewList");
 
-  if (!dialog || !openButton || !closeButton || !form || !result) {
+  if (!dialog || !openButton || !closeButton || !form || !result || !review || !reviewList) {
     return;
   }
 
@@ -414,7 +416,8 @@ function initializeGraduationExam() {
     q9: "true",
     q10: "allowance",
     q11: "true",
-    q12: "all",
+    q12: "false",
+    q13: "true",
   };
 
   const clearGrade = () => {
@@ -423,6 +426,8 @@ function initializeGraduationExam() {
     });
     result.className = "exam-result";
     result.textContent = "";
+    review.classList.remove("visible");
+    reviewList.replaceChildren();
   };
 
   openButton.addEventListener("click", () => {
@@ -449,25 +454,47 @@ function initializeGraduationExam() {
     const unanswered = Object.keys(answers).find((name) => !responses.has(name));
     if (unanswered) {
       result.classList.add("incomplete");
-      result.textContent = "Please answer all 12 questions before grading your exam.";
+      result.textContent = "Please answer all 13 questions before grading your exam.";
       form.querySelector(`[name="${unanswered}"]`)?.closest(".exam-question")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
 
     let score = 0;
+    const missedQuestions = [];
     Object.entries(answers).forEach(([name, answer]) => {
       const question = form.querySelector(`[name="${name}"]`)?.closest(".exam-question");
       const isCorrect = responses.get(name) === answer;
       score += isCorrect ? 1 : 0;
       question?.classList.add(isCorrect ? "answer-correct" : "answer-incorrect");
+
+      if (!isCorrect && question) {
+        const questionText = question.querySelector("legend")?.textContent?.trim() || name;
+        const correctInput = question.querySelector(`[name="${name}"][value="${answer}"]`);
+        const correctAnswer = correctInput?.closest("label")?.textContent?.trim() || answer;
+        missedQuestions.push({ questionText, correctAnswer });
+      }
     });
 
-    const percentage = Math.round((score / 12) * 100);
-    const passed = score >= 10;
+    const totalQuestions = Object.keys(answers).length;
+    const percentage = Math.round((score / totalQuestions) * 100);
+    const passed = score >= 11;
     result.classList.add(passed ? "pass" : "fail");
     result.textContent = passed
-      ? `PASS — ${score}/12 (${percentage}%). Congratulations, you passed the TAOT University Graduation Exam!`
-      : `FAIL — ${score}/12 (${percentage}%). Review the highlighted lessons and try again. You need 10 correct answers to pass.`;
+      ? `PASS — ${score}/${totalQuestions} (${percentage}%). Congratulations, you passed the TAOT University Graduation Exam!`
+      : `FAIL — ${score}/${totalQuestions} (${percentage}%). Review the highlighted lessons and try again. You need 11 correct answers to pass.`;
+
+    missedQuestions.forEach(({ questionText, correctAnswer }) => {
+      const item = document.createElement("li");
+      const questionLabel = document.createElement("span");
+      const answerLabel = document.createElement("span");
+      questionLabel.className = "exam-review-question";
+      questionLabel.textContent = questionText;
+      answerLabel.className = "exam-review-answer";
+      answerLabel.textContent = `Correct answer: ${correctAnswer}`;
+      item.append(questionLabel, answerLabel);
+      reviewList.append(item);
+    });
+    review.classList.toggle("visible", missedQuestions.length > 0);
     result.scrollIntoView({ behavior: "smooth", block: "nearest" });
   });
 }
