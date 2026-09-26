@@ -617,6 +617,7 @@ dd {
 .locked-liquidity-metric {
   position: relative;
   overflow: hidden;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
   background:
     radial-gradient(circle at 12% 18%, rgba(34, 197, 94, 0.16), transparent 7rem),
     rgba(255, 255, 255, 0.065);
@@ -705,6 +706,25 @@ dd {
 
 .section-heading.compact {
   margin-bottom: 18px;
+}
+
+.metric-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+}
+
+.locked-liquidity-metric:hover,
+.locked-liquidity-metric:has(.metric-card-link:focus-visible) {
+  border-color: rgba(52, 211, 153, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 28px rgba(52, 211, 153, 0.17);
+  transform: translateY(-1px);
+}
+
+.metric-card-link:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: -3px;
 }
 
 .tokenization-section .section-heading {
