@@ -12,6 +12,7 @@ export default defineConfig({
         podcast: resolve(__dirname, "podcast.html"),
         tokenization: resolve(__dirname, "tokenization.html"),
         tokenomics: resolve(__dirname, "tokenomics.html"),
+        university: resolve(__dirname, "university.html"),
         privacy: resolve(__dirname, "privacy/index.html"),
       },
     },
