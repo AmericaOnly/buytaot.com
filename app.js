@@ -391,8 +391,90 @@ function initializePodcastVideos() {
   });
 }
 
+function initializeGraduationExam() {
+  const dialog = document.querySelector("#graduationExam");
+  const openButton = document.querySelector("#openGraduationExam");
+  const closeButton = document.querySelector("#closeGraduationExam");
+  const form = document.querySelector("#graduationExamForm");
+  const result = document.querySelector("#examResult");
+
+  if (!dialog || !openButton || !closeButton || !form || !result) {
+    return;
+  }
+
+  const answers = {
+    q1: "base",
+    q2: "250m",
+    q3: "erc20",
+    q4: "true",
+    q5: "eth",
+    q6: "true",
+    q7: "never",
+    q8: "verify",
+    q9: "true",
+    q10: "allowance",
+    q11: "true",
+    q12: "all",
+  };
+
+  const clearGrade = () => {
+    form.querySelectorAll(".exam-question").forEach((question) => {
+      question.classList.remove("answer-correct", "answer-incorrect");
+    });
+    result.className = "exam-result";
+    result.textContent = "";
+  };
+
+  openButton.addEventListener("click", () => {
+    if (typeof dialog.showModal === "function") {
+      dialog.showModal();
+    } else {
+      dialog.setAttribute("open", "");
+    }
+  });
+
+  closeButton.addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+
+  form.addEventListener("reset", () => window.setTimeout(clearGrade));
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    clearGrade();
+
+    const responses = new FormData(form);
+    const unanswered = Object.keys(answers).find((name) => !responses.has(name));
+    if (unanswered) {
+      result.classList.add("incomplete");
+      result.textContent = "Please answer all 12 questions before grading your exam.";
+      form.querySelector(`[name="${unanswered}"]`)?.closest(".exam-question")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
+    let score = 0;
+    Object.entries(answers).forEach(([name, answer]) => {
+      const question = form.querySelector(`[name="${name}"]`)?.closest(".exam-question");
+      const isCorrect = responses.get(name) === answer;
+      score += isCorrect ? 1 : 0;
+      question?.classList.add(isCorrect ? "answer-correct" : "answer-incorrect");
+    });
+
+    const percentage = Math.round((score / 12) * 100);
+    const passed = score >= 10;
+    result.classList.add(passed ? "pass" : "fail");
+    result.textContent = passed
+      ? `PASS — ${score}/12 (${percentage}%). Congratulations, you passed the TAOT University Graduation Exam!`
+      : `FAIL — ${score}/12 (${percentage}%). Review the highlighted lessons and try again. You need 10 correct answers to pass.`;
+    result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+}
+
 loadSiteSwapWidget();
 initializePodcastVideos();
+initializeGraduationExam();
 if (document.querySelector("#livePrice") || document.querySelector("[data-market-price]")) {
   window.setInterval(updateMarketData, 60000);
 }

@@ -77,6 +77,7 @@
               <span class="lesson-number">Lesson 01</span>
               <h2>What is TAOT?</h2>
               <p>TAOT, The America Only Token, is an ERC-20 token deployed on Base. It has a maximum supply of 250 million tokens and a publicly verified smart contract.</p>
+              <p>Because TAOT lives on a public blockchain, anyone can independently inspect its contract, token supply, holders, and transfers. The official contract address is <code>0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e</code>.</p>
               <div class="lesson-links">
                 <a href="tokenomics.html">Explore tokenomics</a>
                 <a href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Verify on Basescan</a>
@@ -88,6 +89,7 @@
               <h2>What is a token?</h2>
               <p>A token is a digital asset represented by a smart contract on a blockchain. The contract records balances and defines how tokens can be transferred. TAOT follows the widely supported ERC-20 standard.</p>
               <p>Each token contract has a unique address. Always verify that address before buying, importing, or transferring a token.</p>
+              <p>Two tokens can share the same name or symbol, so the contract address is the most reliable identifier. ERC-20 compatibility gives wallets and decentralized applications a common way to read balances and request transfers.</p>
             </article>
 
             <article class="course-card" id="lesson-evm">
@@ -95,12 +97,14 @@
               <h2>What is the EVM?</h2>
               <p>The Ethereum Virtual Machine, or EVM, is the environment that executes Ethereum-compatible smart contracts. Networks such as Base use EVM standards, allowing many Ethereum wallets, applications, and developer tools to work across compatible networks.</p>
               <p>TAOT is on Base, so a wallet must be connected to Base when sending or interacting with TAOT.</p>
+              <p>An EVM address can often be used on several compatible networks, but balances and transactions remain separate on each network. Always check the selected network before taking action.</p>
             </article>
 
             <article class="course-card" id="lesson-wallets">
               <span class="lesson-number">Lesson 04</span>
               <h2>Wallets and self-custody</h2>
               <p>A wallet manages the keys used to authorize blockchain transactions. A public wallet address can safely be shared to receive tokens. A private key or recovery phrase must remain secret because it provides control over the wallet.</p>
+              <p>Self-custody means the wallet owner controls those keys and is responsible for protecting them. Store recovery information offline, check addresses carefully, and never enter a recovery phrase into a website reached through an unexpected message.</p>
               <div class="lesson-callout"><strong>Core rule:</strong> TAOT representatives will never need your private key or recovery phrase.</div>
               <div class="lesson-links"><a href="wallets.html">View compatible wallets</a></div>
             </article>
@@ -110,6 +114,7 @@
               <h2>Transactions and gas</h2>
               <p>A blockchain transaction is a signed instruction, such as sending a token or approving a swap. Base charges a small network fee, commonly called gas, which is paid in ETH. Gas pays the network to process the transaction; it is separate from the token being transferred.</p>
               <p>Transactions are generally irreversible. Review the network, destination address, token, amount, and wallet prompt before approving.</p>
+              <p>After submission, a transaction receives a unique transaction hash. That hash can be searched on a block explorer to confirm whether the transaction is pending, successful, or failed.</p>
             </article>
 
             <article class="course-card" id="lesson-liquidity">
@@ -117,7 +122,37 @@
               <h2>Swaps, pools, and liquidity</h2>
               <p>Decentralized exchanges use liquidity pools to let users swap between assets. TAOT's primary market is the TAOT/USDC Aerodrome pool on Base. Prices can move as trades change the balance of assets in a pool.</p>
               <p>Slippage, price impact, liquidity depth, and network fees can affect a swap. Review the complete wallet prompt before confirming.</p>
+              <p>Liquidity is the supply of both assets available in a pool. Deeper liquidity usually allows a trade to have less price impact, while slippage settings define how much price movement a user will accept before a swap fails.</p>
               <div class="lesson-links"><a href="https://www.dextools.io/app/token/taot" target="_blank" rel="noreferrer">View TAOT market data</a></div>
+            </article>
+
+            <article class="course-card" id="lesson-explorers">
+              <span class="lesson-number">Lesson 07</span>
+              <h2>Block explorers and on-chain verification</h2>
+              <p>A block explorer is a public search tool for blockchain data. Basescan lets you inspect Base transactions, wallet balances, token holders, contract code, and transaction status without connecting a wallet.</p>
+              <p>Search with a transaction hash, wallet address, or contract address. Explorer records are useful for verification, but a familiar token name alone does not prove authenticity; compare the full contract address with an official source.</p>
+              <div class="lesson-links"><a href="https://basescan.org/token/0x7f2f00e54dcaa8b248bdfd75da2ae859d4d8ff3e" target="_blank" rel="noreferrer">Inspect TAOT on Basescan</a></div>
+            </article>
+
+            <article class="course-card" id="lesson-contracts">
+              <span class="lesson-number">Lesson 08</span>
+              <h2>How smart contracts work</h2>
+              <p>A smart contract is a program stored on a blockchain. It executes defined rules when a user or another contract calls one of its functions. ERC-20 contracts provide standard functions for balances, transfers, supply, and allowances.</p>
+              <p>Published contract code and activity can be reviewed on a block explorer. A contract interaction may move assets or change permissions, so read the wallet prompt and confirm the contract address before signing.</p>
+            </article>
+
+            <article class="course-card" id="lesson-approvals">
+              <span class="lesson-number">Lesson 09</span>
+              <h2>Token approvals and allowances</h2>
+              <p>A token approval gives a specific smart contract permission to spend up to an allowed amount of a token from your wallet. Decentralized exchanges commonly request an approval before they can complete a swap.</p>
+              <p>An approval does not reveal your private key, but an unnecessary or unlimited allowance can create risk if the approved contract is unsafe. Review the contract and amount before approving. You can inspect and revoke existing approvals with a reputable allowance-management tool.</p>
+            </article>
+
+            <article class="course-card" id="lesson-bridges">
+              <span class="lesson-number">Lesson 10</span>
+              <h2>Bridges and cross-chain transfers</h2>
+              <p>A blockchain bridge moves value or messages between networks. Depending on its design, a bridge may lock or burn an asset on the source network and release or mint a corresponding asset on the destination network.</p>
+              <p>Bridging is different from a normal same-network transfer. Before using a bridge, verify the official bridge, source network, destination network, token, and destination contract address. Allow time for both networks to confirm the operation.</p>
             </article>
           </div>
 
@@ -135,11 +170,39 @@
             </ul>
           </section>
 
-          <div class="university-next">
-            <div><p class="eyebrow">More lessons ahead</p><h2>TAOT University will continue to grow.</h2><p>Future lessons can cover smart contracts, token approvals, block explorers, bridges, liquidity, security, and other blockchain concepts in greater depth.</p></div>
-            <a class="button primary" href="https://whitepaper.buytaot.com" target="_blank" rel="noreferrer">Read the TAOT whitepaper</a>
+          <div class="university-next graduation-cta">
+            <div><p class="eyebrow">Graduation exam</p><h2>Put your TAOT knowledge to the test.</h2><p>Answer 12 questions drawn directly from the lessons above. A score of 10 or more earns a passing grade, and you can retake the exam at any time.</p></div>
+            <button class="button primary graduation-exam-link" id="openGraduationExam" type="button">Are you ready to take the TAOT University Graduation Exam?</button>
           </div>
         </section>
+
+        <dialog class="exam-dialog" id="graduationExam" aria-labelledby="examTitle">
+          <div class="exam-shell">
+            <header class="exam-header">
+              <div><p class="eyebrow">TAOT University</p><h2 id="examTitle">Graduation Exam</h2></div>
+              <button class="exam-close" id="closeGraduationExam" type="button" aria-label="Close graduation exam">&times;</button>
+            </header>
+            <form id="graduationExamForm">
+              <p class="exam-intro">Choose one answer for each question. You need 10 of 12 correct to pass.</p>
+
+              <fieldset class="exam-question"><legend>1. Which network is TAOT deployed on?</legend><label class="exam-option"><input type="radio" name="q1" value="ethereum"> Ethereum mainnet</label><label class="exam-option"><input type="radio" name="q1" value="base"> Base</label><label class="exam-option"><input type="radio" name="q1" value="bitcoin"> Bitcoin</label></fieldset>
+              <fieldset class="exam-question"><legend>2. What is TAOT's maximum token supply?</legend><label class="exam-option"><input type="radio" name="q2" value="25m"> 25 million</label><label class="exam-option"><input type="radio" name="q2" value="250m"> 250 million</label><label class="exam-option"><input type="radio" name="q2" value="unlimited"> Unlimited</label></fieldset>
+              <fieldset class="exam-question"><legend>3. Which token standard does TAOT follow?</legend><label class="exam-option"><input type="radio" name="q3" value="erc20"> ERC-20</label><label class="exam-option"><input type="radio" name="q3" value="erc721"> ERC-721</label><label class="exam-option"><input type="radio" name="q3" value="bep2"> BEP-2</label></fieldset>
+              <fieldset class="exam-question"><legend>4. The EVM executes Ethereum-compatible smart contracts.</legend><label class="exam-option"><input type="radio" name="q4" value="true"> True</label><label class="exam-option"><input type="radio" name="q4" value="false"> False</label></fieldset>
+              <fieldset class="exam-question"><legend>5. Which asset pays network gas fees on Base?</legend><label class="exam-option"><input type="radio" name="q5" value="taot"> TAOT</label><label class="exam-option"><input type="radio" name="q5" value="usdc"> USDC</label><label class="exam-option"><input type="radio" name="q5" value="eth"> ETH</label></fieldset>
+              <fieldset class="exam-question"><legend>6. A public wallet address can be shared to receive tokens.</legend><label class="exam-option"><input type="radio" name="q6" value="true"> True</label><label class="exam-option"><input type="radio" name="q6" value="false"> False</label></fieldset>
+              <fieldset class="exam-question"><legend>7. When should you share your private key or recovery phrase?</legend><label class="exam-option"><input type="radio" name="q7" value="support"> When support requests it</label><label class="exam-option"><input type="radio" name="q7" value="never"> Never</label><label class="exam-option"><input type="radio" name="q7" value="swap"> Before making a swap</label></fieldset>
+              <fieldset class="exam-question"><legend>8. What can a block explorer help you verify?</legend><label class="exam-option"><input type="radio" name="q8" value="passwords"> Wallet passwords</label><label class="exam-option"><input type="radio" name="q8" value="verify"> Transactions, balances, and contracts</label><label class="exam-option"><input type="radio" name="q8" value="future"> Future token prices</label></fieldset>
+              <fieldset class="exam-question"><legend>9. Smart contracts execute defined rules when their functions are called.</legend><label class="exam-option"><input type="radio" name="q9" value="true"> True</label><label class="exam-option"><input type="radio" name="q9" value="false"> False</label></fieldset>
+              <fieldset class="exam-question"><legend>10. What does a token approval do?</legend><label class="exam-option"><input type="radio" name="q10" value="ownership"> Transfers ownership of your wallet</label><label class="exam-option"><input type="radio" name="q10" value="allowance"> Lets a specific contract spend up to an allowed token amount</label><label class="exam-option"><input type="radio" name="q10" value="gas"> Eliminates gas fees</label></fieldset>
+              <fieldset class="exam-question"><legend>11. Existing token approvals can be reviewed and revoked.</legend><label class="exam-option"><input type="radio" name="q11" value="true"> True</label><label class="exam-option"><input type="radio" name="q11" value="false"> False</label></fieldset>
+              <fieldset class="exam-question"><legend>12. Before bridging, what should you verify?</legend><label class="exam-option"><input type="radio" name="q12" value="speed"> Only the estimated speed</label><label class="exam-option"><input type="radio" name="q12" value="networks"> Only the destination network</label><label class="exam-option"><input type="radio" name="q12" value="all"> The official bridge, both networks, token, and destination contract</label></fieldset>
+
+              <div class="exam-actions"><button class="button primary" type="submit">Grade my exam</button><button class="button secondary" id="resetGraduationExam" type="reset">Retake exam</button></div>
+              <div class="exam-result" id="examResult" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </dialog>
 
         <section class="community" id="community" aria-labelledby="community-title">
           <div class="section-heading compact"><p class="eyebrow">Official channels</p><h2 id="community-title">TAOT Social Media</h2></div>
