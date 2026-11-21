@@ -9,6 +9,9 @@ export const giveawayConfig = {
   // "sample data" notice so nobody mistakes them for real winners.
   isSampleData: false,
 
+  // The TAOT tracker that works out each wallet's weekly buys and streak.
+  trackerUrl: "https://taot-tracker-production.up.railway.app",
+
   // Weekly prize amounts (TAOT)
   prizes: { first: 5000, second: 2500, third: 1000 },
 

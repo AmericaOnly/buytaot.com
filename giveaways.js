@@ -150,6 +150,7 @@ function checkWallet(raw) {
     result.textContent = "That doesn't look like a wallet address. It should start with 0x and be 42 characters long.";
     return;
   }
+  loadStatus(addr);
   const wins = [];
   for (const w of winnerHistory) {
     if (norm(w.grandPrize) === addr) wins.push({ week: w.weekOf, prize: 10000, place: "Grand Prize" });
@@ -169,6 +170,66 @@ function checkWallet(raw) {
     result.classList.add("is-miss");
     result.innerHTML = `<b>Not this time.</b> A new week means a new chance to win. Enter this week's giveaway and check back on Winner Wednesday.`;
   }
+}
+
+// ── Live status from the TAOT tracker: this week's buys, tier, streak ─────
+const statusBox = $("[data-status]");
+const trackerBase = ["localhost", "127.0.0.1"].includes(location.hostname)
+  ? "http://localhost:4747"
+  : cfg.trackerUrl;
+const money = (n) => `$${Number(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+const BADGE_STEPS = [{ name: "Bronze", weeks: 4 }, { name: "Silver", weeks: 8 }, { name: "Gold", weeks: 12 }];
+let statusReq = 0;
+
+async function loadStatus(addr) {
+  if (!trackerBase) return;
+  const req = ++statusReq;
+  statusBox.hidden = false;
+  statusBox.innerHTML = `<p class="gw-status-loading">Loading your streak…</p>`;
+  let s;
+  try {
+    const r = await fetch(`${trackerBase}/public/giveaway/wallet/${addr}`, { cache: "no-store" });
+    if (!r.ok) throw new Error(r.status);
+    s = await r.json();
+  } catch {
+    if (req === statusReq) statusBox.innerHTML = `<p class="gw-status-loading">Your streak couldn't load right now. Try again in a minute.</p>`;
+    return;
+  }
+  if (req !== statusReq) return;
+  const w = s.thisWeek, st = s.streak;
+  const closes = new Date(s.window.end).toLocaleString("en-US", { weekday: "long", hour: "numeric", minute: "2-digit", timeZone: "America/New_York" });
+  const places = [["1st", 1], ["2nd", 2], ["3rd", 3]];
+  const inDraw = new Set(w.eligibleFor);
+  const pct = Math.min(100, (st.current / 12) * 100);
+
+  let headline;
+  if (w.free) headline = `You're entered in all three drawings this week with a free entry.`;
+  else if (w.tier) headline = `You're in the ${w.eligibleFor.join(", ").replace(/, ([^,]*)$/, " and $1")} place drawing${w.eligibleFor.length > 1 ? "s" : ""} this week.`;
+  else headline = `You're not entered this week yet.`;
+  const nudge = w.nextTier
+    ? `Buy <b>${money(w.nextTier.needUsd)}</b> more TAOT before ${closes} ET to enter the <b>${w.nextTier.label}</b> drawing.`
+    : w.tier === 1 ? `You've reached the top tier. Good luck on Winner Wednesday!` : "";
+  const streakLine = st.current
+    ? (st.qualifiedThisWeek ? `${st.current}-week streak` : `${st.current}-week streak. Enter this week to keep it going!`)
+    : "Start your streak this week";
+
+  statusBox.innerHTML = `
+    <div class="gw-status-head">
+      <span class="gw-status-flame" aria-hidden="true">🔥</span>
+      <div><b>${streakLine}</b><small>${st.badge ? `${st.badge} badge earned` : "No badge yet"}${st.nextBadge ? ` · ${st.weeksToNext} more week${st.weeksToNext === 1 ? "" : "s"} to ${st.nextBadge}` : " · Top badge reached"}</small></div>
+    </div>
+    <div class="gw-streak-track" aria-label="Streak progress toward badges">
+      <span class="gw-streak-fill" style="width:${pct}%"></span>
+      ${BADGE_STEPS.map((b) => `<i class="${st.best >= b.weeks ? "got" : ""} b-${b.name.toLowerCase()}" style="left:${(b.weeks / 12) * 100}%"><em>${b.name}</em></i>`).join("")}
+    </div>
+    <div class="gw-week">
+      <p class="gw-week-label">This week · closes ${closes} ET</p>
+      <p class="gw-week-amount">${money(w.net)} <small>net TAOT bought</small></p>
+      <div class="gw-week-draws">${places.map(([p, t]) => `<span class="${inDraw.has(p) ? "on" : ""} t${t}">${inDraw.has(p) ? "✓" : "✕"} ${p} place</span>`).join("")}</div>
+      <p class="gw-week-msg">${headline}${nudge ? `<br>${nudge}` : ""}</p>
+    </div>
+    ${s.history.length > 1 ? `<div class="gw-weeks" aria-label="Recent weeks">${s.history.map((h) => `<span class="${h.tier ? "on" : ""} ${h.open ? "open" : ""}" title="${h.drawingDate}">${h.tier ? "✓" : ""}</span>`).join("")}</div>` : ""}
+    <p class="gw-status-foot">Net buys = TAOT bought minus TAOT sold during this week's entry window, in USD at the time of each trade. Updates about once a minute.${s.countedAs ? " Buys from your linked app wallet are included." : ""}</p>`;
 }
 
 form.addEventListener("submit", (e) => {
