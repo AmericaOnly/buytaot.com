@@ -196,6 +196,21 @@ async function loadStatus(addr) {
     return;
   }
   if (req !== statusReq) return;
+  if (!s.appUser) {
+    statusBox.innerHTML = `
+      <div class="gw-status-head">
+        <span class="gw-status-flame" aria-hidden="true">📲</span>
+        <div><b>This wallet isn't registered yet</b><small>Giveaways are for TAOT app users only</small></div>
+      </div>
+      <div class="gw-week">
+        <p class="gw-week-msg" style="margin:0">To be eligible, share your wallet QR code from the TAOT app in the official
+        <a href="https://t.me/BUYTAOT" target="_blank" rel="noreferrer">TAOT Telegram group</a>.
+        Once it's registered, your buys this week count automatically and your streak starts.</p>
+        ${s.thisWeek.net > 0 ? `<p class="gw-week-msg">This wallet has <b>${money(s.thisWeek.net)}</b> in net TAOT buys this week.</p>` : ""}
+      </div>
+      <p class="gw-status-foot">Checking the right wallet? Use the wallet address shown in your TAOT app.</p>`;
+    return;
+  }
   const w = s.thisWeek, st = s.streak;
   const closes = new Date(s.window.end).toLocaleString("en-US", { weekday: "long", hour: "numeric", minute: "2-digit", timeZone: "America/New_York" });
   const places = [["1st", 1], ["2nd", 2], ["3rd", 3]];
