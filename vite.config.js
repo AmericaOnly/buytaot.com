@@ -9,6 +9,7 @@ export default defineConfig({
         index: resolve(__dirname, "index.html"),
         wallets: resolve(__dirname, "wallets.html"),
         available: resolve(__dirname, "available.html"),
+        giveaways: resolve(__dirname, "giveaways.html"),
         podcast: resolve(__dirname, "podcast.html"),
         tokenization: resolve(__dirname, "tokenization.html"),
         tokenomics: resolve(__dirname, "tokenomics.html"),
