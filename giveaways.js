@@ -327,13 +327,13 @@ try {
   function showMe(s) {
     me.hidden = false;
     me.className = "gta-me";
-    const n = s.entries || 0;
+    const n = (s.entries || 0) * 10; // the tracker counts $50 blocks; each $50 = 10 entries
     const since = new Date(s.signedUpAt).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: "America/New_York" });
     me.innerHTML = `
       <div class="gta-me-count"><b>${n}</b><span>entr${n === 1 ? "y" : "ies"}</span></div>
       <div class="gta-me-text">
         <b>You're signed up${n ? " and in the drawing!" : "!"}</b>
-        <span>${money(s.net || 0)} of TAOT bought since you signed up.${ended ? "" : ` Buy <b>${money(s.toNext ?? g.usdPerEntry)}</b> more for entry #${n + 1}.`}</span>
+        <span>${money(s.net || 0)} of TAOT bought since you signed up.${ended ? "" : ` Buy <b>${money(s.toNext ?? g.usdPerEntry)}</b> more for 10 more entries.`}</span>
         <small><code>${short(s.address)}</code> · signed up ${since} ET · ends ${endLabel}. Entries update about once a minute.</small>
       </div>
       <button type="button" class="gta-switch" data-gta-switch>Use a different wallet</button>`;
