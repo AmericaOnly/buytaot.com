@@ -280,6 +280,129 @@ try {
     </li>`).join("");
 })();
 
+// ── GTA Console Giveaway: sign-up + live entry count ──────────
+(function gtaGiveaway() {
+  const g = cfg.gtaGiveaway;
+  const box = $("[data-gta]");
+  if (!g?.active || !box) return;
+  box.hidden = false;
+  $("[data-gta-jump]").hidden = false;
+  box.querySelectorAll("[data-gta-per]").forEach((el) => (el.textContent = g.usdPerEntry));
+  if (g.prize) $("[data-gta-prize]").textContent = g.prize;
+
+  const GTA_KEY = "taot-gta-wallet";
+  const end = new Date(g.endsAt).getTime();
+  const endLabel = new Date(end).toLocaleString("en-US", { weekday: "long", month: "long", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: "America/New_York" }) + " ET";
+  const form = $("[data-gta-form]");
+  const msg = $("[data-gta-msg]");
+  const me = $("[data-gta-me]");
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  // Countdown to the end
+  const gcd = { d: $('[data-gcd="d"]'), h: $('[data-gcd="h"]'), m: $('[data-gcd="m"]'), s: $('[data-gcd="s"]') };
+  function gtaTick() {
+    const t = Math.max(0, Math.floor((end - Date.now()) / 1000));
+    gcd.d.textContent = Math.floor(t / 86400);
+    gcd.h.textContent = pad(Math.floor((t % 86400) / 3600));
+    gcd.m.textContent = pad(Math.floor((t % 3600) / 60));
+    gcd.s.textContent = pad(t % 60);
+    if (!t) $("[data-gta-clock-label]").textContent = "This giveaway has ended";
+  }
+  gtaTick();
+  setInterval(gtaTick, 1000);
+
+  const ended = Date.now() > end;
+  if (ended) {
+    form.hidden = true;
+    box.querySelector(".gta-steps").hidden = true;
+    box.querySelector(".gta-help").hidden = true;
+    const w = g.winner;
+    me.hidden = false;
+    me.className = "gta-me is-ended";
+    me.innerHTML = w
+      ? `<b>🏆 Winner</b><code>${esc(w)}</code><small>Congratulations! We'll contact the winner using the details they entered.</small>`
+      : `<b>Entries are closed.</b><small>Thanks for entering! The winner will be announced here soon.</small>`;
+  }
+
+  function showMe(s) {
+    me.hidden = false;
+    me.className = "gta-me";
+    const n = s.entries || 0;
+    const since = new Date(s.signedUpAt).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: "America/New_York" });
+    me.innerHTML = `
+      <div class="gta-me-count"><b>${n}</b><span>entr${n === 1 ? "y" : "ies"}</span></div>
+      <div class="gta-me-text">
+        <b>You're signed up${n ? " and in the drawing!" : "!"}</b>
+        <span>${money(s.net || 0)} of TAOT bought since you signed up.${ended ? "" : ` Buy <b>${money(s.toNext ?? g.usdPerEntry)}</b> more for entry #${n + 1}.`}</span>
+        <small><code>${short(s.address)}</code> · signed up ${since} ET · ends ${endLabel}. Entries update about once a minute.</small>
+      </div>
+      <button type="button" class="gta-switch" data-gta-switch>Use a different wallet</button>`;
+    me.querySelector("[data-gta-switch]").addEventListener("click", () => {
+      try { localStorage.removeItem(GTA_KEY); } catch {}
+      me.hidden = true;
+      if (!ended) { form.hidden = false; form.address.focus(); }
+    });
+  }
+
+  async function lookup(addr) {
+    if (!trackerBase) return;
+    try {
+      const r = await fetch(`${trackerBase}/public/gta/wallet/${addr}`, { cache: "no-store" });
+      if (!r.ok) return;
+      const s = await r.json();
+      if (!s.signedUp) return;
+      if (!ended) form.hidden = true;
+      showMe(s);
+    } catch { /* tracker unreachable */ }
+  }
+
+  function say(text, kind) {
+    msg.hidden = false;
+    msg.className = `gta-msg is-${kind}`;
+    msg.innerHTML = text;
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = form.elements;
+    const body = {
+      address: norm(f.address.value), name: f.name.value.trim(), email: f.email.value.trim(),
+      phone: f.phone.value.trim(), agree: f.agree.checked, website: f.website.value,
+    };
+    if (!/^0x[0-9a-f]{40}$/.test(body.address)) return say("That wallet address doesn't look right. It should start with <b>0x</b> and be 42 characters long. Use the <b>receive address</b> from the wallet you buy TAOT with.", "error");
+    if (body.name.length < 2) return say("Please enter your name.", "error");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(body.email)) return say("Please enter a valid email address.", "error");
+    if (body.phone.replace(/\D/g, "").length < 10) return say("Please enter a valid phone number.", "error");
+    if (!body.agree) return say("Please tick the box to agree to the giveaway rules.", "error");
+    const btn = form.querySelector(".gta-submit");
+    btn.disabled = true;
+    btn.textContent = "Entering…";
+    try {
+      const r = await fetch(`${trackerBase}/public/gta/enter`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || "Something went wrong. Please try again.");
+      try { localStorage.setItem(GTA_KEY, body.address); } catch {}
+      msg.hidden = true;
+      form.hidden = true;
+      form.reset();
+      if (j.address) showMe(j);
+      me.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    } catch (err) {
+      say(esc(err.message === "Failed to fetch" ? "We couldn't reach the giveaway server. Check your connection and try again." : err.message), "error");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Enter the giveaway";
+    }
+  });
+
+  // Returning visitor: show their entries. Prefill from the weekly checker's saved wallet if there is one.
+  try {
+    const saved = localStorage.getItem(GTA_KEY);
+    if (saved) lookup(saved);
+    else if (localStorage.getItem(REMEMBER_KEY)) form.address.value = localStorage.getItem(REMEMBER_KEY);
+  } catch { /* storage unavailable */ }
+})();
+
 // ── Jump links open the matching card ─────────────────────────
 root.querySelectorAll('.gw-jump a[href^="#"]').forEach((a) => {
   a.addEventListener("click", () => {

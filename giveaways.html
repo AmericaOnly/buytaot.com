@@ -69,6 +69,65 @@
       <main class="main-stage giveaways-page" id="top">
         <div class="gw" id="giveawayApp">
 
+          <!-- GTA CONSOLE GIVEAWAY (limited time; toggle in giveaways-data.js) -->
+          <section class="gta" id="gta" aria-labelledby="gta-title" data-gta hidden>
+            <div class="gta-top">
+              <span class="gta-badge"><span aria-hidden="true"></span> Limited time · 10 days only</span>
+              <span class="gta-pad" aria-hidden="true">🎮</span>
+            </div>
+            <p class="gta-kicker">TAOT presents</p>
+            <h2 id="gta-title">The Grand Theft Auto<br><span>Console Giveaway</span></h2>
+            <p class="gta-lede">Win <b data-gta-prize>a gaming console with Grand Theft Auto</b>. Every <b>$<span data-gta-per>50</span></b> of TAOT you buy = <b>1 entry</b>. The more you buy, the better your chances.</p>
+
+            <div class="gta-clock" aria-live="polite">
+              <p data-gta-clock-label>Giveaway ends in</p>
+              <div class="gw-clock" data-gta-clock>
+                <div><b data-gcd="d">0</b><span>Days</span></div>
+                <div><b data-gcd="h">00</b><span>Hrs</span></div>
+                <div><b data-gcd="m">00</b><span>Min</span></div>
+                <div><b data-gcd="s">00</b><span>Sec</span></div>
+              </div>
+            </div>
+
+            <ol class="gta-steps">
+              <li><b>Copy your receive address</b><span>from the wallet you buy TAOT with: Coinbase, MetaMask, the Base app, or any other wallet.</span></li>
+              <li><b>Sign up below</b><span>Paste your address and add your name, email and phone so we can reach you if you win.</span></li>
+              <li><b>Buy TAOT with that wallet</b><span>Every $<span data-gta-per>50</span> you buy until the giveaway ends is 1 entry. Entries are counted automatically.</span></li>
+            </ol>
+
+            <details class="gta-help">
+              <summary>📋 How do I find my receive address?</summary>
+              <div class="gta-help-body">
+                <p>Your receive address is the wallet address other people would send TAOT to. It starts with <code>0x</code> and is 42 characters long. <b>It has to be the same wallet you buy TAOT with</b>, or your buys won't count.</p>
+                <ul>
+                  <li><b>Coinbase:</b> tap <b>Transfer</b> (or <b>Send &amp; receive</b>), then <b>Receive</b>. Search for TAOT, choose the <b>Base</b> network, and tap <b>Copy</b>.</li>
+                  <li><b>Base app</b> (formerly Coinbase Wallet): tap <b>Receive</b> (or your profile), pick <b>Base</b>, and copy your address.</li>
+                  <li><b>MetaMask:</b> make sure the <b>Base</b> network is selected, tap <b>Receive</b>, and copy your address.</li>
+                  <li><b>Other wallets</b> (Phantom, Rabby, Trust Wallet, and others): tap <b>Receive</b>, choose <b>Base</b> or <b>Ethereum</b>, and copy the address that starts with <code>0x</code>.</li>
+                </ul>
+                <p>Never share your recovery phrase or private key. We only need your public receive address.</p>
+              </div>
+            </details>
+
+            <form class="gta-form" data-gta-form novalidate>
+              <label class="gta-field gta-field-wallet">
+                <span>Wallet receive address</span>
+                <input name="address" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="0x…" required>
+              </label>
+              <label class="gta-field"><span>Full name</span><input name="name" type="text" autocomplete="name" placeholder="First and last name" required></label>
+              <label class="gta-field"><span>Email</span><input name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" placeholder="you@email.com" required></label>
+              <label class="gta-field"><span>Phone</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555" required></label>
+              <label class="gta-hp" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+              <label class="gta-agree"><input name="agree" type="checkbox" required> <span>I'm 18 or older, I agree to the giveaway rules, and TAOT may contact me about this giveaway. We never sell your info.</span></label>
+              <button class="button primary gta-submit" type="submit">Enter the giveaway</button>
+              <div class="gta-msg" data-gta-msg aria-live="polite" hidden></div>
+            </form>
+
+            <div class="gta-me" data-gta-me aria-live="polite" hidden></div>
+
+            <p class="gta-fine">Only buys made <b>after you sign up</b>, from the wallet you entered, count. Entries are based on net buys (TAOT bought minus TAOT sold), in USD at the time of each trade. The winner is announced on this page after the giveaway ends. No purchase necessary; see the <a href="#rules">official rules</a>. Not affiliated with or endorsed by Rockstar Games or any console maker.</p>
+          </section>
+
           <p class="gw-sample-note" data-sample-note hidden>Preview: the winners and download count below are sample data. Replace them in giveaways-data.js before launch.</p>
 
           <div class="gw-bonus" data-bonus hidden>
@@ -127,6 +186,7 @@
 
           <!-- QUICK NAV -->
           <nav class="gw-jump" aria-label="Giveaway sections">
+            <a href="#gta" data-gta-jump hidden>🎮 GTA Console</a>
             <a href="#winners">🏆 Winners</a>
             <a href="#weekly">💰 Weekly</a>
             <a href="#grand">👑 Grand Prize</a>
