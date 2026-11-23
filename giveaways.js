@@ -327,7 +327,7 @@ try {
   function showMe(s) {
     me.hidden = false;
     me.className = "gta-me";
-    const n = (s.entries || 0) * 10; // the tracker counts $50 blocks; each $50 = 10 entries
+    const n = s.entries || 0; // tracker: 10 entries per $50 ($47+ counts)
     const since = new Date(s.signedUpAt).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: "America/New_York" });
     me.innerHTML = `
       <div class="gta-me-count"><b>${n}</b><span>entr${n === 1 ? "y" : "ies"}</span></div>
