@@ -14,6 +14,7 @@ export default defineConfig({
         tokenization: resolve(__dirname, "tokenization.html"),
         tokenomics: resolve(__dirname, "tokenomics.html"),
         university: resolve(__dirname, "university.html"),
+        referral: resolve(__dirname, "referral.html"),
         privacy: resolve(__dirname, "privacy/index.html"),
       },
     },
