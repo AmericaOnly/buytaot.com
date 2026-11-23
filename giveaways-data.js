@@ -25,11 +25,11 @@ export const giveawayConfig = {
 
   // GTA Console Giveaway (the card at the very top of the page).
   // Set active to false to hide it. Sign-ups and entries are tracked by the TAOT tracker.
-  // endsAt must match GTA_END in the tracker (Dec 2, 2026, 11:59 PM ET).
+  // endsAt must match GTA_END in the tracker (Thu Dec 3, 2026, 4:45 PM ET = winner announced).
   gtaGiveaway: {
     active: true,
     prize: "a gaming console with Grand Theft Auto",
-    endsAt: "2026-12-02T23:59:59-05:00",
+    endsAt: "2026-12-03T16:45:00-05:00",
     usdPerEntry: 50,
     winner: null, // after the drawing: "0x…winning wallet"
   },
