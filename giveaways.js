@@ -336,11 +336,68 @@ try {
         <span>${money(s.net || 0)} of TAOT bought since you signed up.${ended ? "" : ` Buy <b>${money(s.toNext ?? g.usdPerEntry)}</b> more for 10 more entries.`}</span>
         <small><code>${short(s.address)}</code> · signed up ${since} ET · ends ${endLabel}. Entries update about once a minute.</small>
       </div>
+      ${ended ? "" : claimBox(s)}
       <button type="button" class="gta-switch" data-gta-switch>Use a different wallet</button>`;
+    if (!ended) wireClaim(s);
     me.querySelector("[data-gta-switch]").addEventListener("click", () => {
       try { localStorage.removeItem(GTA_KEY); } catch {}
       me.hidden = true;
       if (!ended) { form.hidden = false; form.address.focus(); }
+    });
+  }
+
+  // Coinbase app buys land in a separate Coinbase wallet, not the Receive address people sign up with.
+  // Entering the TAOT amount from the receipt finds that buy and links the wallet, so all its buys count.
+  function claimBox(s) {
+    const linked = s.linked || [];
+    return `
+      <details class="gta-claim"${linked.length || s.entries ? "" : " open"}>
+        <summary>${linked.length ? "✅ Coinbase buys linked · link another buy" : "Bought in the Coinbase app? Link your buys here"}</summary>
+        ${linked.length ? `<p class="gta-claim-ok">Linked buying wallet${linked.length > 1 ? "s" : ""}: ${linked.map((a) => `<code>${short(a)}</code>`).join(", ")}. Every buy it makes before the giveaway ends counts automatically.</p>` : ""}
+        <p>Buys in the Coinbase app go to a separate Coinbase wallet, so we can't see them from the address above. Open the receipt for your TAOT buy in Coinbase and type the <b>Amount</b> of TAOT (not dollars). You only need to do this once.</p>
+        <form class="gta-claim-form" data-gta-claim novalidate>
+          <label class="gta-field"><span>TAOT amount on your receipt</span><input name="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1,060.72" required></label>
+          <label class="gta-field" data-claim-time hidden><span>Date and time on your receipt</span><input name="time" type="datetime-local"></label>
+          <button class="button primary gta-claim-btn" type="submit">Link my buy</button>
+          <div class="gta-msg" data-claim-msg aria-live="polite" hidden></div>
+        </form>
+      </details>`;
+  }
+  function wireClaim(s) {
+    const f = me.querySelector("[data-gta-claim]");
+    if (!f) return;
+    const out = f.querySelector("[data-claim-msg]");
+    const tell = (html, kind) => { out.hidden = false; out.className = `gta-msg is-${kind}`; out.innerHTML = html; };
+    f.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const amount = f.amount.value.trim();
+      if (!/\d/.test(amount)) return tell("Enter the TAOT amount from your receipt, for example <b>1,060.72</b>.", "error");
+      const t = f.time.value ? new Date(f.time.value).getTime() : null;
+      const btn = f.querySelector(".gta-claim-btn");
+      btn.disabled = true;
+      btn.textContent = "Looking for your buy…";
+      try {
+        const r = await fetch(`${trackerBase}/public/gta/claim`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ address: s.address, amount, time: t }) });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) {
+          if (j.needTime) f.querySelector("[data-claim-time]").hidden = false;
+          throw new Error(j.error || "Something went wrong. Please try again.");
+        }
+        showMe(j);
+        const ok = me.querySelector(".gta-claim");
+        if (ok) {
+          ok.open = true;
+          const m = ok.querySelector("[data-claim-msg]");
+          m.hidden = false;
+          m.className = "gta-msg is-ok";
+          m.innerHTML = j.already ? "That buy is already linked to your entry. 👍" : `Found it! Your Coinbase buys now count: you have <b>${j.entries || 0} entries</b>.`;
+        }
+      } catch (err) {
+        tell(esc(err.message === "Failed to fetch" ? "We couldn't reach the giveaway server. Check your connection and try again." : err.message), "error");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Link my buy";
+      }
     });
   }
 
